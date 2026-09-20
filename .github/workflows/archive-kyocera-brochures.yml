@@ -34,6 +34,12 @@ jobs:
           download "https://www.kyoceradocumentsolutions.eu/content/dam/download-center-cf/eu/documents/datasheet/TASKalfa_MZ3501ci_datasheet_pdf.download.pdf" "taskalfa-mz3501ci.pdf"
           download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ4000i_pdf.download.pdf" "taskalfa-mz4000i.pdf"
           download "https://www.kyoceradocumentsolutions.eu/content/dam/download-center-cf/eu/documents/datasheet/datasheet-taskalfa-mz10500i.download.pdf" "taskalfa-mz10500i.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ4001ci_pdf.download.pdf" "taskalfa-mz4001ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ5001ci_pdf.download.pdf" "taskalfa-mz5001ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ5001i_pdf.download.pdf" "taskalfa-mz5001i.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ6001ci_pdf.download.pdf" "taskalfa-mz6001ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ6001i_pdf.download.pdf" "taskalfa-mz6001i.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ7001ci_pdf.download.pdf" "taskalfa-mz7001ci.pdf"
 
           cat > brochures/SOURCES.txt <<'EOF'
           TASKalfa MA3500ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMA3500CI.html
@@ -43,6 +49,12 @@ jobs:
           TASKalfa MZ3501ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ3501CI.html
           TASKalfa MZ4000i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ4000I.html
           TASKalfa MZ10500i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ10500I.html
+          TASKalfa MZ4001ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ4001CI.html
+          TASKalfa MZ5001ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ5001CI.html
+          TASKalfa MZ5001i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ5001I.html
+          TASKalfa MZ6001ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ6001CI.html
+          TASKalfa MZ6001i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ6001I.html
+          TASKalfa MZ7001ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ7001CI.html
           EOF
 
       - name: Commit archived brochures
