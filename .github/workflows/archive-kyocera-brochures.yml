@@ -4,7 +4,6 @@ on:
   push:
     paths-ignore:
       - "brochures/**"
-      - ".github/workflows/archive-kyocera-brochures.yml"
   workflow_dispatch:
 
 permissions:
@@ -33,32 +32,22 @@ jobs:
           from urllib.parse import urljoin
           from urllib.request import Request, urlopen
 
-          out=Path("brochures")
-          out.mkdir(exist_ok=True)
-          rows=[]
+          out=Path("brochures"); out.mkdir(exist_ok=True); rows=[]
           for line in os.environ["PAGES"].strip().splitlines():
               slug,page,target=line.split("|")
-              req=Request(page,headers={"User-Agent":"Mozilla/5.0"})
-              source=urlopen(req,timeout=30).read().decode("utf-8","ignore")
+              source=urlopen(Request(page,headers={"User-Agent":"Mozilla/5.0"}),timeout=30).read().decode("utf-8","ignore")
               links=[]
               for match in re.findall(r'''(?:href|data-href|data-url)=["']([^"']+)["']''',source,re.I):
                   href=html.unescape(match)
-                  if ".pdf" in href.lower():
-                      links.append(urljoin(page,href))
-              links=list(dict.fromkeys(links))
-              candidates=[u for u in links if "datasheet" in u.lower()]
-              if not candidates:
-                  candidates=links
-              if not candidates:
-                  raise SystemExit(f"No PDF link found for {slug} on {page}")
+                  if ".pdf" in href.lower(): links.append(urljoin(page,href))
+              links=list(dict.fromkeys(links)); candidates=[u for u in links if "datasheet" in u.lower()]
+              if not candidates: candidates=links
+              if not candidates: raise SystemExit(f"No PDF link found for {slug} on {page}")
               pdf_url=candidates[0]
               data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=60).read()
-              if not data.startswith(b"%PDF"):
-                  raise SystemExit(f"Downloaded content for {slug} is not a PDF: {pdf_url}")
-              (out/target).write_bytes(data)
-              rows.append(f"{slug}|{pdf_url}")
-              print(f"Downloaded {slug}: {pdf_url}")
-          (out/"SOURCES.txt").write_text("\\n".join(rows)+"\\n",encoding="utf-8")
+              if not data.startswith(b"%PDF"): raise SystemExit(f"Not a PDF: {pdf_url}")
+              (out/target).write_bytes(data); rows.append(f"{slug}|{pdf_url}"); print(f"Downloaded {slug}: {pdf_url}")
+          (out/"SOURCES.txt").write_text("\n".join(rows)+"\n",encoding="utf-8")
           PY
       - name: Commit archived brochures
         run: |
