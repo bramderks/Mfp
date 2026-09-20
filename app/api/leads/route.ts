@@ -1,3 +1,15 @@
 import {NextResponse} from "next/server";import {z} from "zod";import {PrismaClient} from "@prisma/client";
+
 const schema=z.object({type:z.enum(["quote","contact"]),name:z.string().min(2),company:z.string().optional(),email:z.string().email(),phone:z.string().optional(),city:z.string().optional(),message:z.string().optional(),product:z.string().optional()});
-export async function POST(req:Request){try{const parsed=schema.safeParse(await req.json());if(!parsed.success)return NextResponse.json({error:"Ongeldige gegevens"},{status:400});if(process.env.DATABASE_URL){const prisma=new PrismaClient();await prisma.lead.create({data:parsed.data});await prisma.$disconnect()}return NextResponse.json({ok:true})}catch{return NextResponse.json({error:"Kon aanvraag niet verwerken"},{status:500})}}
+
+export async function POST(req:Request){
+ try{
+  const parsed=schema.safeParse(await req.json());
+  if(!parsed.success)return NextResponse.json({error:"Ongeldige gegevens"},{status:400});
+  if(!process.env.DATABASE_URL)return NextResponse.json({error:"Leadopslag is nog niet geconfigureerd"},{status:503});
+  const prisma=new PrismaClient();
+  try{await prisma.lead.create({data:parsed.data});}
+  finally{await prisma.$disconnect();}
+  return NextResponse.json({ok:true});
+ }catch{return NextResponse.json({error:"Kon aanvraag niet verwerken"},{status:500});}
+}
