@@ -3,10 +3,12 @@ import Link from "next/link";
 const solutions = [
   {num:"01", title:"Beveiligd printen", text:"Gevoelige documenten blijven onder controle met gebruikersauthenticatie, printvrijgave en duidelijke toegangsrechten.", tags:["Follow-me printing","Authenticatie","Print release"]},
   {num:"02", title:"Slimmer scannen", text:"Maak van scannen een workflow. Routeer documenten naar e-mail, mappen, cloudomgevingen of andere bedrijfsprocessen.", tags:["Scan workflows","OCR","Document routing"]},
-  {num:"03", title:"Cloud & mobiel werken", text:"Laat medewerkers veilig printen en scannen vanaf de werkplek, laptop of mobiele omgeving zonder onnodige tussenstappen.", tags:["Mobiel printen","Cloud","Hybride werken"]},
-  {num:"04", title:"Kosten & beheer", text:"Krijg grip op volumes, verbruik en apparatuur. Centraal beheer maakt de printomgeving overzichtelijker.", tags:["Monitoring","Tellerstanden","Rapportage"]},
-  {num:"05", title:"Document management", text:"Breng papier en digitale documenten samen in een werkwijze die past bij uw organisatie en informatiebehoefte.", tags:["Archiveren","Documentstromen","Automatisering"]},
-  {num:"06", title:"Duurzaam printen", text:"Een passende machine op de juiste plek, minder verspilling en inzicht in gebruik vormen samen een efficiëntere printomgeving.", tags:["Efficiëntie","Verbruik","Lifecycle"]},
+  {num:"03", title:"Cloud & mobiel werken", text:"Laat medewerkers veilig printen en scannen vanaf de werkplek, laptop of mobiele omgeving. Denk aan cloudopslag, mobiel printen en werken vanaf verschillende locaties.", tags:["Mobiel printen","Cloud","Hybride werken"]},
+  {num:"04", title:"Workflow & output management", text:"Automatiseer terugkerende documentstromen. Laat documenten op basis van regels naar de juiste printer, mailbox, opslag of vervolgstap gaan.", tags:["Workflow","Output management","Automatisering"]},
+  {num:"05", title:"OCR & documentverwerking", text:"Maak gescande documenten beter doorzoekbaar en bruikbaar. OCR kan een stap zijn tussen papier, digitale bestanden en uw bedrijfsprocessen.", tags:["OCR","Scan to workflow","Documentverwerking"]},
+  {num:"06", title:"Kosten & beheer", text:"Krijg grip op volumes, verbruik, tellerstanden en apparatuur. Centraal beheer en rapportage maken de printomgeving overzichtelijker.", tags:["Monitoring","Tellerstanden","Rapportage"]},
+  {num:"07", title:"Document management", text:"Breng papier en digitale documenten samen in een werkwijze die past bij uw organisatie en informatiebehoefte.", tags:["Archiveren","Documentstromen","Documentbeheer"]},
+  {num:"08", title:"Duurzaam printen", text:"Een passende machine op de juiste plek, minder verspilling en inzicht in gebruik vormen samen een efficiëntere printomgeving.", tags:["Efficiëntie","Verbruik","Lifecycle"]},
 ];
 
 export const metadata={title:"Oplossingen",description:"Beveiligd printen, scanworkflows, cloud, document management en beheer van uw printomgeving."};
@@ -24,7 +26,7 @@ export default function Solutions(){
 
     <section className="container editorial-section">
       <div className="section-intro">
-        <div><div className="eyebrow">VAN APPARAAT NAAR WORKFLOW</div><h2>Printen, scannen en beheren als één geheel.</h2></div>
+        <div><div className="eyebrow">VAN APPARAAT NAAR WORKFLOW</div><h2>Printen, scannen, beveiligen en automatiseren als één geheel.</h2></div>
         <p className="lead">Wij kijken niet alleen naar de machine. We kijken naar wie ermee werkt, wat er met documenten gebeurt en waar het proces slimmer, veiliger of eenvoudiger kan.</p>
       </div>
       <div className="solution-grid">{solutions.map(s=><article className="solution-card" key={s.num}><div className="solution-number">{s.num}</div><h3>{s.title}</h3><p>{s.text}</p><div className="tag-list">{s.tags.map(t=><span key={t}>{t}</span>)}</div></article>)}</div>
