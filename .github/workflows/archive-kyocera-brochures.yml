@@ -2,9 +2,6 @@
 name: Archive Kyocera brochures
 
 on:
-  push:
-    paths-ignore:
-      - "brochures/**"
   workflow_dispatch:
 
 permissions:
