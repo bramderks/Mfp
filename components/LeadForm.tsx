@@ -13,9 +13,15 @@ export default function LeadForm({type,product}:{type:"quote"|"contact";product?
     e.preventDefault();
     setLoading(true);setError("");
     const data=Object.fromEntries(new FormData(e.currentTarget));
-    const r=await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...data,type,product:data.product||product||""})});
-    setLoading(false);
-    if(r.ok)setDone(true);else setError("Er ging iets mis. Controleer uw gegevens en probeer het opnieuw.");
+    try{
+      const r=await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...data,type,product:data.product||product||""})});
+      if(r.ok)setDone(true);else{
+        const body=await r.json().catch(()=>null);
+        setError(body?.error||"Er ging iets mis. Controleer uw gegevens en probeer het opnieuw.");
+      }
+    }catch{
+      setError("De aanvraag kon niet worden verstuurd. Controleer uw verbinding en probeer het opnieuw.");
+    }finally{setLoading(false);}
   }
 
   if(done)return <div className="card success-card"><div className="eyebrow">AANVRAAG ONTVANGEN</div><h2>Bedankt voor uw aanvraag.</h2><p>We hebben uw gegevens ontvangen. We nemen persoonlijk contact met u op om uw aanvraag te bespreken.</p></div>;
@@ -34,6 +40,6 @@ export default function LeadForm({type,product}:{type:"quote"|"contact";product?
     <label className="field"><span>Plaats</span><input className="input" name="city" placeholder="Vestigingsplaats"/></label>
     <label className="field"><span>{type==="quote"?"Uw situatie en wensen":"Uw vraag"}</span><textarea className="input" name="message" placeholder={type==="quote"?"Bijvoorbeeld aantal medewerkers, printvolume, huidige MFP of gewenste functies.":"Uw vraag"} rows={7}/></label>
     {error && <p className="form-error">{error}</p>}
-    <button className="btn btn-primary form-submit" disabled={loading}>{loading?"Aanvraag wordt verstuurd…":"Offerte aanvragen"}</button>
+    <button className="btn btn-primary form-submit" disabled={loading}>{loading?"Aanvraag wordt verstuurd…":type==="quote"?"Offerte aanvragen":"Vraag versturen"}</button>
   </form>;
 }
