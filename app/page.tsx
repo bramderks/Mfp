@@ -1,2 +1,62 @@
-import Link from "next/link";import Image from "next/image";import {products} from "@/lib/products";
-export default function Home(){return <main><section style={{background:"linear-gradient(105deg,#10253f 0%,#173f67 58%,#1667b1 100%)",color:"#fff"}}><div className="container" style={{minHeight:560,display:"grid",gridTemplateColumns:"1.05fr .95fr",alignItems:"center",gap:50}}><div><div className="eyebrow" style={{color:"#a9d7ff"}}>MFP & DOCUMENTOPLOSSINGEN</div><h1 style={{fontSize:"clamp(44px,6vw,72px)",lineHeight:1.02,margin:"16px 0 25px"}}>Print slimmer.<br/>Werk beter.</h1><p style={{fontSize:20,lineHeight:1.65,maxWidth:610,color:"#e6f0f8"}}>Professionele multifunctionals, printers en slimme documentoplossingen. Wij helpen organisaties de juiste machine én workflow te kiezen.</p><div style={{display:"flex",gap:14,marginTop:32,flexWrap:"wrap"}}><Link className="btn btn-light" href="/producten">Bekijk producten</Link><Link className="btn" style={{border:"1px solid #ffffff55",color:"#fff"}} href="/offerte">Vraag een offerte aan</Link></div></div><div style={{position:"relative",height:420,borderRadius:12,overflow:"hidden"}}><Image src={products[1].image} alt="Professionele multifunctional" fill priority style={{objectFit:"cover"}} sizes="(max-width:900px) 100vw, 50vw"/></div></div></section><section className="container" style={{paddingTop:85}}><div className="eyebrow">ONZE PRODUCTEN</div><h2 style={{fontSize:42,margin:"10px 0 12px",color:"var(--navy)"}}>Een MFP die past bij uw organisatie</h2><p style={{fontSize:18,color:"#5d6874",maxWidth:720}}>Van compacte A4-oplossingen tot krachtige A3-systemen. Vergelijk eigenschappen en vraag direct advies.</p><div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:22,marginTop:38}}>{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card" key={p.slug} style={{textDecoration:"none",color:"inherit"}}><div style={{height:230,position:"relative"}}><Image src={p.image} alt={p.name} fill style={{objectFit:"cover"}} sizes="33vw"/></div><div style={{padding:24}}><div className="eyebrow">{p.category}</div><h3 style={{fontSize:23,color:"var(--navy)"}}>{p.name}</h3><p style={{color:"#5d6874",lineHeight:1.6}}>{p.description}</p><b style={{color:"var(--blue)"}}>Bekijk product →</b></div></Link>)}</div></section><section style={{background:"var(--light)",marginTop:90,padding:"80px 0"}}><div className="container" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:70,alignItems:"center"}}><div><div className="eyebrow">MEER DAN EEN PRINTER</div><h2 style={{fontSize:42,color:"var(--navy)"}}>Van apparaat naar complete oplossing</h2><p style={{fontSize:18,lineHeight:1.7,color:"#5d6874"}}>Beveiligd printen, documentbeheer, scanworkflows en cloud-integratie. We kijken naar de hele documentstroom.</p><Link className="btn btn-primary" href="/oplossingen">Ontdek oplossingen</Link></div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:15}}>{["Beveiligd printen","Documentworkflow","Cloud & scan","Beheer & service"].map(x=><div key={x} className="card" style={{padding:25}}><b style={{color:"var(--navy)"}}>{x}</b><p style={{color:"#697580",lineHeight:1.5}}>Slim ingericht voor uw organisatie.</p></div>)}</div></div></section><section className="container" style={{padding:"85px 0"}}><div style={{background:"var(--navy)",borderRadius:12,padding:"55px 60px",color:"#fff",display:"flex",justifyContent:"space-between",gap:30,alignItems:"center",flexWrap:"wrap"}}><div><div className="eyebrow" style={{color:"#9ed5ff"}}>PERSOONLIJK ADVIES</div><h2 style={{fontSize:38,margin:"10px 0"}}>Welke MFP past bij u?</h2><p style={{color:"#d6e1ea",fontSize:17}}>Vertel ons wat u nodig heeft. Wij helpen u de juiste keuze maken.</p></div><Link className="btn btn-light" href="/offerte">Start adviesaanvraag</Link></div></section></main>}
+import Link from "next/link";
+import Image from "next/image";
+import {products} from "@/lib/products";
+import {brand} from "@/lib/brand";
+
+export default function Home(){
+  return <main>
+    <section className="dark-hero home-hero">
+      <div className="container hero-grid">
+        <div className="hero-copy">
+          <div className="eyebrow eyebrow-light">MFP ISELTO · PRINT · SCAN · MANAGE</div>
+          <h1>Print slimmer.<br/>Werk beter.</h1>
+          <p>Professionele multifunctionals, printers en documentoplossingen voor organisaties die betrouwbaar en efficiënt willen werken.</p>
+          <div className="hero-actions">
+            <Link className="btn btn-light" href="/producten">Bekijk producten</Link>
+            <Link className="btn btn-outline-light" href="/offerte">Vraag advies</Link>
+          </div>
+        </div>
+        <div className="hero-image">
+          <Image src={products[1].image} alt="Professionele multifunctional" fill priority style={{objectFit:"cover"}} sizes="(max-width:900px) 100vw, 50vw"/>
+        </div>
+      </div>
+    </section>
+
+    <section className="container editorial-section">
+      <div className="eyebrow">ERVARING & AANPAK</div>
+      <h2>{brand.experience}. Kennis die we vertalen naar een oplossing die past.</h2>
+      <p className="lead">Geen machine om de machine, maar een oplossing die aansluit op uw volumes, processen, medewerkers en toekomstplannen.</p>
+      <Link className="text-link" href="/over-iselto">Ontdek onze missie, visie en strategie →</Link>
+    </section>
+
+    <section className="split-section">
+      <div className="container split-grid">
+        <div><div className="eyebrow">ONZE MISSIE</div><h2>Van printapparaat naar een oplossing die dagelijks waarde toevoegt.</h2></div>
+        <div><p className="large-copy">{brand.mission}</p><Link className="btn btn-primary" href="/oplossingen">Bekijk onze oplossingen</Link></div>
+      </div>
+    </section>
+
+    <section className="container editorial-section">
+      <div className="eyebrow">PRODUCTEN</div>
+      <h2>De juiste MFP voor uw organisatie.</h2>
+      <p className="lead">Van compacte A4-oplossingen tot krachtige A3-systemen. Bekijk, vergelijk en vraag gericht advies.</p>
+      <div className="product-grid">{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card" key={p.slug}><div className="product-image"><Image src={p.image} alt={p.name} fill style={{objectFit:"cover"}} sizes="(max-width:650px) 92vw, 33vw"/></div><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><b>Bekijk product →</b></div></Link>)}</div>
+    </section>
+
+    <section className="strategy-section">
+      <div className="container">
+        <div className="eyebrow eyebrow-light">ONZE WERKWIJZE</div>
+        <h2>Van behoefte naar oplossing.</h2>
+        <p className="strategy-intro">Begrijpen. Adviseren. Inrichten. Optimaliseren.</p>
+        <div className="strategy-grid">{brand.strategy.map(step=><article key={step.title}><h3>{step.title}</h3><p>{step.text}</p></article>)}</div>
+      </div>
+    </section>
+
+    <section className="container cta-section">
+      <div className="cta-panel">
+        <div><div className="eyebrow eyebrow-light">PERSOONLIJK ADVIES</div><h2>Welke MFP past bij u?</h2><p>Vertel ons wat u nodig heeft. Wij helpen u de juiste oplossing samenstellen.</p></div>
+        <Link className="btn btn-light" href="/offerte">Start adviesaanvraag</Link>
+      </div>
+    </section>
+  </main>
+}
