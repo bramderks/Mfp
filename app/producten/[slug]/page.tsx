@@ -21,7 +21,7 @@ export default async function ProductPage({params}:{params:Promise<{slug:string}
           <h1>{p.name}</h1>
           <p>{p.description}</p>
           <div className="product-detail-stats"><span>{p.speed}</span><span>{p.format}</span><span>{p.colour?"Kleur":"Zwart-wit"}</span></div>
-          <div className="product-detail-actions"><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Offerte aanvragen</Link><a className="btn btn-secondary" href={p.brochurePath} target="_blank" rel="noreferrer">Brochure downloaden</a></div>
+          <div className="product-detail-actions"><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Offerte aanvragen</Link><a className="btn btn-secondary" href={p.brochurePath} target="_blank" rel="noreferrer">{p.brochurePath.toLowerCase().includes(".pdf")?"Brochure downloaden":"Documentatie bekijken"}</a></div>
           <a className="source-link" href={p.sourceUrl} target="_blank" rel="noreferrer">Bekijk productinformatie bij Kyocera →</a>
         </div>
       </div>
