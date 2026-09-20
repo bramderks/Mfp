@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {products} from "@/lib/products";
 import {brand} from "@/lib/brand";
 
@@ -17,7 +16,7 @@ export default function Home(){
           </div>
         </div>
         <div className="hero-image">
-          <Image src={products[1].image} alt="Professionele multifunctional" fill priority style={{objectFit:"cover"}} sizes="(max-width:900px) 100vw, 50vw"/>
+          <img src={products[1].image} alt="Professionele multifunctional" className="home-product-image" loading="eager"/>
         </div>
       </div>
     </section>
@@ -40,7 +39,7 @@ export default function Home(){
       <div className="eyebrow">PRODUCTEN</div>
       <h2>De juiste MFP voor uw organisatie.</h2>
       <p className="lead">Van compacte A4-oplossingen tot krachtige A3-systemen. Bekijk, vergelijk en vraag gericht advies.</p>
-      <div className="product-grid">{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card" key={p.slug}><div className="product-image"><Image src={p.image} alt={p.name} fill style={{objectFit:"cover"}} sizes="(max-width:650px) 92vw, 33vw"/></div><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><b>Bekijk product →</b></div></Link>)}</div>
+      <div className="product-grid">{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card" key={p.slug}><div className="product-image"><img src={p.image} alt={p.name} className="product-image-element" loading="lazy"/></div><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><b>Bekijk product →</b></div></Link>)}</div>
     </section>
 
     <section className="strategy-section">
