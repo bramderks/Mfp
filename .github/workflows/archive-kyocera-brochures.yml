@@ -1,0 +1,70 @@
+name: Archive Kyocera brochures
+
+on:
+  push:
+    paths-ignore:
+      - "brochures/**"
+      - ".github/workflows/archive-kyocera-brochures.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download official datasheets
+        env:
+          PAGES: |
+            taskalfa-mz7001i|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ7001I.html|taskalfa-mz7001i.pdf
+            ecosys-ma3500cix|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/ECOSYSMA3500CIX.html|ecosys-ma3500cix.pdf
+            taskalfa-308ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA308CI.html|taskalfa-308ci.pdf
+            taskalfa-358ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA358CI.html|taskalfa-358ci.pdf
+            taskalfa-408ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA408CI.html|taskalfa-408ci.pdf
+            taskalfa-508ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA508CI.html|taskalfa-508ci.pdf
+            taskalfa-7353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA7353CI.html|taskalfa-7353ci.pdf
+            taskalfa-8353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA8353CI.html|taskalfa-8353ci.pdf
+        run: |
+          python - <<'PY'
+          import html, os, re
+          from pathlib import Path
+          from urllib.parse import urljoin
+          from urllib.request import Request, urlopen
+
+          out=Path("brochures")
+          out.mkdir(exist_ok=True)
+          rows=[]
+          for line in os.environ["PAGES"].strip().splitlines():
+              slug,page,target=line.split("|")
+              req=Request(page,headers={"User-Agent":"Mozilla/5.0"})
+              source=urlopen(req,timeout=30).read().decode("utf-8","ignore")
+              links=[]
+              for match in re.findall(r'''(?:href|data-href|data-url)=["']([^"']+)["']''',source,re.I):
+                  href=html.unescape(match)
+                  if ".pdf" in href.lower():
+                      links.append(urljoin(page,href))
+              links=list(dict.fromkeys(links))
+              candidates=[u for u in links if "datasheet" in u.lower()]
+              if not candidates:
+                  candidates=links
+              if not candidates:
+                  raise SystemExit(f"No PDF link found for {slug} on {page}")
+              pdf_url=candidates[0]
+              data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=60).read()
+              if not data.startswith(b"%PDF"):
+                  raise SystemExit(f"Downloaded content for {slug} is not a PDF: {pdf_url}")
+              (out/target).write_bytes(data)
+              rows.append(f"{slug}|{pdf_url}")
+              print(f"Downloaded {slug}: {pdf_url}")
+          (out/"SOURCES.txt").write_text("\\n".join(rows)+"\\n",encoding="utf-8")
+          PY
+      - name: Commit archived brochures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brochures
+          git diff --cached --quiet && exit 0
+          git commit -m "Archive Kyocera MFP brochures"
+          git push
