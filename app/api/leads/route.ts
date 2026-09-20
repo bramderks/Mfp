@@ -1,4 +1,4 @@
-import {NextResponse} from "next";import {z} from "zod";import {Resend} from "resend";import {prisma} from "@/lib/db";
+import {NextResponse} from "next/server";import {z} from "zod";import {Resend} from "resend";import {prisma} from "@/lib/db";
 const schema=z.object({type:z.enum(["quote","contact"]),name:z.string().trim().min(2).max(120),company:z.string().trim().max(160).optional(),email:z.string().trim().email().max(254),phone:z.string().trim().max(50).optional(),city:z.string().trim().max(120).optional(),message:z.string().trim().max(4000).optional(),product:z.string().trim().max(120).optional(),website:z.string().trim().max(200).optional()});
 const rateLimit=new Map<string,{count:number;resetAt:number}>();const WINDOW_MS=10*60*1000;const MAX_REQUESTS=5;
 function escapeHtml(value:string){return value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
