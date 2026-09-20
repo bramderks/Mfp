@@ -49,7 +49,7 @@ jobs:
                   for m in re.finditer(re.escape(token),source,re.I):
                       window=source[max(0,m.start()-5000):m.start()+5000]
                       dm=re.search(r'"dcLink":"([^"]+\\.pdf)"',window,re.I)
-                      if dm: candidates.append((urljoin(page,dm.group(1)),token+".pdf"); break
+                      if dm:\n                          candidates.append((urljoin(page,dm.group(1)),token+".pdf")); break
               if not candidates: raise SystemExit(f"Could not locate datasheet for {slug}")
               pdf_url,_=candidates[0]
               data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=90).read()
