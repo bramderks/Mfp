@@ -2,13 +2,13 @@ import Link from "next/link";
 import {products} from "@/lib/products";
 import {brand} from "@/lib/brand";
 
-const stats=[["25+","jaar ervaring"],["A4 & A3","MFP portfolio"],["1","persoonlijk aanspreekpunt"],["360°","print & document"]];
+const stats=[["25+","jaar printkennis"],["1.000+","klanten in de Benelux"],["B2B","volledige focus"],["360°","hardware · software · service"]];
 
 export default function Home(){
  return <main>
   <section className="home-hero">
    <div className="container hero-grid">
-    <div className="hero-copy"><div className="eyebrow eyebrow-light">MFP ISELTO · PRINT · SCAN · MANAGE</div><h1>Print slimmer.<br/><span>Werk beter.</span></h1><p>Professionele multifunctionals en documentoplossingen voor organisaties die betrouwbaar, veilig en efficiënt willen werken.</p><div className="hero-actions"><Link className="btn btn-light" href="/producten">Bekijk MFP's</Link><Link className="btn btn-outline-light" href="/offerte">Vraag advies</Link></div><div className="hero-note">25 jaar ervaring in de printbranche</div></div>
+    <div className="hero-copy"><div className="eyebrow eyebrow-light">MFP ISELTO · PRINT · SCAN · MANAGE</div><h1>Print slimmer.<br/><span>Werk beter.</span></h1><p>Zakelijke multifunctionals, software en service voor organisaties die betrouwbaar, veilig en efficiënt willen werken. Lease, huur of koop — met één aanspreekpunt voor de complete printomgeving.</p><div className="hero-actions"><Link className="btn btn-light" href="/mfp-kiezen">Vind mijn MFP</Link><Link className="btn btn-outline-light" href="/offerte">Vraag offerte</Link></div><div className="hero-note">25 jaar ervaring in de printbranche</div></div>
     <div className="hero-product"><div className="hero-product-label">UITGELICHT</div><img src={products[1].image} alt={products[1].name} loading="eager"/><div className="hero-product-caption"><span>{products[1].category}</span><strong>{products[1].name}</strong><small>{products[1].speed} · {products[1].format}</small></div></div>
    </div>
   </section>
