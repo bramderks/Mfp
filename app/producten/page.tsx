@@ -1,11 +1,13 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
+import MfpSelector from "@/components/MfpSelector";
 
 export const metadata={title:"MFP's",description:"Bekijk en vergelijk Kyocera multifunctionals van ISELTO. Van compacte A4-modellen tot krachtige A3-systemen."};
 
 export default function Products(){
  return <main>
-  <section className="dark-hero products-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">MFP SELECTEREN</div><h1>Kies de MFP die bij uw organisatie past.</h1><p>Bekijk het ISELTO-portfolio, vergelijk de belangrijkste eigenschappen en vraag direct een offerte aan voor een model dat aansluit op uw situatie.</p><div className="hero-actions"><Link className="btn btn-light" href="/vergelijker">Vergelijk modellen</Link><Link className="btn btn-outline-light" href="/offerte">Ik wil advies</Link></div></div></section>
+  <section className="dark-hero products-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">MFP SELECTEREN</div><h1>Kies de MFP die bij uw organisatie past.</h1><p>Bekijk het ISELTO-portfolio, gebruik de keuzehulp of vergelijk de belangrijkste eigenschappen en vraag direct een offerte aan voor een model dat aansluit op uw situatie.</p><div className="hero-actions"><Link className="btn btn-light" href="/vergelijker">Vergelijk modellen</Link><Link className="btn btn-outline-light" href="/offerte">Ik wil advies</Link></div></div></section>
+  <MfpSelector />
   <section className="container catalog-section"><div className="catalog-toolbar"><div><div className="eyebrow">KYOCERA PORTFOLIO</div><h2>{products.length} MFP-modellen.</h2></div><p>Van A4 kleur tot zware A3 zwart-wit productie. Elke productpagina bevat de beschikbare specificaties en documentatie.</p></div>
    <div className="product-grid catalog-grid">{products.map(p=><article className="card product-card" key={p.slug}><Link href={"/producten/"+p.slug} className="product-image-link"><div className="product-image"><img src={p.image} alt={p.name} className="product-image-element" loading="lazy"/></div></Link><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><div className="product-specs"><span>{p.speed}</span><span>{p.format}</span><span>{p.colour?"Kleur":"Zwart-wit"}</span></div><div className="product-actions"><Link className="text-link" href={"/producten/"+p.slug}>Specificaties →</Link><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Offerte</Link></div><a className="source-link" href={p.brochurePath} target="_blank" rel="noreferrer">Documentatie →</a></div></article>)}</div>
   </section>
