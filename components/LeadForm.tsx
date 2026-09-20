@@ -1,5 +1,6 @@
 "use client";
 import {useState} from "react";
+import Link from "next/link";
 import {products} from "@/lib/products";
 
 export default function LeadForm({type,product}:{type:"quote"|"contact";product?:string}){
