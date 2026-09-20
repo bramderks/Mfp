@@ -1,1 +1,14 @@
-export default function Downloads(){return <main className="container" style={{paddingTop:70}}><div className="eyebrow">DOWNLOADS</div><h1 style={{fontSize:52,color:"var(--navy)"}}>Documentatie</h1><p style={{fontSize:19,color:"#5d6874"}}>Handleidingen, datasheets en overige documentatie worden hier centraal beschikbaar gemaakt.</p><div className="card" style={{padding:28,marginTop:40,marginBottom:80}}><b>Productdocumentatie</b><p style={{color:"#5d6874"}}>De definitieve datasheets en handleidingen worden per product toegevoegd vanuit het beheer.</p></div></main>}
+import Link from "next/link";
+import {products} from "@/lib/products";
+
+export const metadata={title:"Downloads",description:"Datasheets en productdocumentatie van de MFP's in het ISELTO-portfolio."};
+
+export default function Downloads(){
+ return <main>
+  <section className="dark-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">DOWNLOADS</div><h1>Documentatie bij uw MFP.</h1><p>Bekijk de beschikbare productdocumentatie. Wilt u weten welke uitvoering en opties bij uw organisatie passen? Wij helpen u verder.</p></div></section>
+  <section className="container editorial-section"><div className="eyebrow">PRODUCTDOCUMENTATIE</div><h2>Datasheets en brochures.</h2><p className="lead">Selecteer een model om de productspecificaties te bekijken of de beschikbare documentatie te openen.</p>
+   <div className="download-grid">{products.map(p=><article className="download-card" key={p.slug}><div className="download-image"><img src={p.image} alt={p.name} loading="lazy"/></div><div className="download-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.speed} · {p.format} · {p.colour?"Kleur":"Zwart-wit"}</p><div className="download-actions"><Link className="text-link" href={"/producten/"+p.slug}>Product bekijken →</Link><a className="btn btn-secondary" href={p.brochurePath} target="_blank" rel="noreferrer">Documentatie</a></div></div></article>)}</div>
+  </section>
+  <section className="split-section"><div className="container split-grid"><div><div className="eyebrow">HULP NODIG?</div><h2>Specificaties zijn het begin van de keuze.</h2></div><div><p className="large-copy">Papierformaten, snelheid en opties zeggen niet alles. Uw volumes en workflow bepalen welke configuratie logisch is.</p><Link className="btn btn-primary" href="/offerte">Vraag advies</Link></div></div></section>
+ </main>
+}
