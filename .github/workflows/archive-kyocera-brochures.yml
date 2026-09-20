@@ -1,4 +1,4 @@
-# Archives the official Kyocera datasheets used as source material for the ISELTO product catalogue.
+# Archives the official Kyocera datasheets/brochures used as source material for the ISELTO catalogue.
 name: Archive Kyocera brochures
 
 on:
@@ -15,57 +15,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download official datasheets
+      - name: Download official Kyocera documents
         run: |
           set -euo pipefail
-          python - <<'PY'
-          import html, re
-          from pathlib import Path
-          from urllib.parse import urljoin
-          from urllib.request import Request, urlopen
+          mkdir -p brochures
 
-          products = [
-            ("taskalfa-mz7001i", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQU1aNzAwMUk%3D.html", "MZ7001i", "taskalfa-mz7001i.pdf"),
-            ("ecosys-ma3500cix", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9FQ09TWVNNQTM1MDBDSVg%3D.html", "MA3500cix", "ecosys-ma3500cix.pdf"),
-            ("taskalfa-308ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTMwOENJ.html", "308ci", "taskalfa-308ci.pdf"),
-            ("taskalfa-358ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTM1OENJ.html", "358ci", "taskalfa-358ci.pdf"),
-            ("taskalfa-408ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTQwOENJ.html", "408ci", "taskalfa-408ci.pdf"),
-            ("taskalfa-508ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTUwOENJ.html", "508ci", "taskalfa-508ci.pdf"),
-            ("taskalfa-7353ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTczNTNDSQ%3D%3D.html", "7353ci", "taskalfa-7353ci.pdf"),
-            ("taskalfa-8353ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTgzNTNDSQ%3D%3D.html", "8353ci", "taskalfa-8353ci.pdf"),
-          ]
-          out=Path("brochures"); out.mkdir(exist_ok=True)
-          rows=[]
-          for slug,page,token,target in products:
-              source=urlopen(Request(page,headers={"User-Agent":"Mozilla/5.0"}),timeout=45).read().decode("utf-8","ignore")
-              source=html.unescape(source)
-              objects=re.findall(r'\{[^{}]{0,12000}?"title":"[^"]*Datasheet[^"}]*"[^{}]{0,12000}?\}',source,re.I)
-              candidates=[]
-              for obj in objects:
-                  m=re.search(r'"dcLink":"([^"]+\\.pdf)"',obj,re.I)
-                  f=re.search(r'"fileName":"([^"]*'+re.escape(token)+r'[^"}]*)"',obj,re.I)
-                  if m and f: candidates.append((urljoin(page,m.group(1)),f.group(1)))
-              if not candidates:
-                  for m in re.finditer(re.escape(token),source,re.I):
-                      window=source[max(0,m.start()-5000):m.start()+5000]
-                      dm=re.search(r'"dcLink":"([^"]+\\.pdf)"',window,re.I)
-                      if dm:
-                          candidates.append((urljoin(page,dm.group(1)),token+".pdf"))
-                          break
-              if not candidates: raise SystemExit(f"Could not locate datasheet for {slug}")
-              pdf_url,_=candidates[0]
-              data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=90).read()
-              if not data.startswith(b"%PDF"): raise SystemExit(f"Not a PDF for {slug}: {pdf_url}")
-              (out/target).write_bytes(data)
-              rows.append(f"{slug}|{pdf_url}")
-              print(f"Archived {slug}: {pdf_url}")
-          (out/"SOURCES.txt").write_text("\n".join(rows)+"\n",encoding="utf-8")
-          PY
+          download() {
+            url="$1"
+            file="$2"
+            curl --fail --location --retry 3 --silent --show-error "$url" -o "brochures/$file"
+            file "brochures/$file" | grep -q "PDF document"
+          }
+
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MA3500ci_pdf.download.pdf" "taskalfa-ma3500ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MA4500ci_pdf.download.pdf" "taskalfa-ma4500ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/brochure/Brochure_TASKalfa_MZ2501ci_serie_pdf.download.pdf" "taskalfa-mz2501ci-serie.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ3200i_pdf.download.pdf" "taskalfa-mz3200i.pdf"
+          download "https://www.kyoceradocumentsolutions.eu/content/dam/download-center-cf/eu/documents/datasheet/TASKalfa_MZ3501ci_datasheet_pdf.download.pdf" "taskalfa-mz3501ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ4000i_pdf.download.pdf" "taskalfa-mz4000i.pdf"
+          download "https://www.kyoceradocumentsolutions.eu/content/dam/download-center-cf/eu/documents/datasheet/datasheet-taskalfa-mz10500i.download.pdf" "taskalfa-mz10500i.pdf"
+
+          cat > brochures/SOURCES.txt <<'EOF'
+          TASKalfa MA3500ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMA3500CI.html
+          TASKalfa MA4500ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMA4500CI.html
+          TASKalfa MZ2501ci series | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ2501CI.html
+          TASKalfa MZ3200i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ3200I.html
+          TASKalfa MZ3501ci | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ3501CI.html
+          TASKalfa MZ4000i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ4000I.html
+          TASKalfa MZ10500i | https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ10500I.html
+          EOF
+
       - name: Commit archived brochures
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add brochures
           git diff --cached --quiet && exit 0
-          git commit -m "Archive Kyocera MFP brochures"
+          git commit -m "Archive additional Kyocera MFP documents"
           git push
