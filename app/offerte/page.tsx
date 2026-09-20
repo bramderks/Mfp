@@ -1,23 +1,6 @@
-import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
-
+export const metadata={title:"Offerte aanvragen",description:"Vraag advies of een offerte aan voor een MFP of documentoplossing van ISELTO."};
 export default async function Quote({searchParams}:{searchParams:Promise<{product?:string}>}){
-  const q=await searchParams;
-  return <main>
-    <section className="dark-hero">
-      <div className="container hero-copy">
-        <div className="eyebrow eyebrow-light">OFFERTE & ADVIES</div>
-        <h1>Vraag een offerte aan voor uw MFP.</h1>
-        <p>Kies een model en vertel ons kort wat u nodig heeft. We nemen persoonlijk contact op om de configuratie en dienstverlening goed af te stemmen.</p>
-      </div>
-    </section>
-    <section className="container quote-section">
-      <div className="quote-intro">
-        <div className="eyebrow">UW KEUZE</div>
-        <h2>Welke MFP wilt u aanvragen?</h2>
-        <p>U kunt hieronder direct een model selecteren. Wilt u eerst advies? Kies dan voor “Ik weet het nog niet”.</p>
-      </div>
-      <LeadForm type="quote" product={q.product}/>
-    </section>
-  </main>
+ const q=await searchParams;
+ return <main><section className="dark-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">OFFERTE & ADVIES</div><h1>Een oplossing die past bij uw organisatie.</h1><p>Kies een MFP of laat de keuze aan ons. Vertel kort hoe u werkt en wat u nodig heeft; daarna bespreken we de mogelijkheden persoonlijk.</p></div></section><section className="container quote-section"><div className="quote-layout"><div className="quote-side"><div className="eyebrow">UW AANVRAAG</div><h2>Van eerste vraag naar concreet voorstel.</h2><div className="quote-steps"><div><strong>01</strong><span>Vertel wat u zoekt</span></div><div><strong>02</strong><span>We bespreken uw situatie</span></div><div><strong>03</strong><span>U ontvangt een passende richting</span></div></div></div><div className="quote-form-card"><LeadForm type="quote" product={q.product}/></div></div></section></main>
 }
