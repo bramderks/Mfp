@@ -1,6 +1,5 @@
 import {notFound} from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import {getProduct,products} from "@/lib/products";
 
 export function generateStaticParams(){return products.map(p=>({slug:p.slug}))}
@@ -15,7 +14,7 @@ export default async function ProductPage({params}:{params:Promise<{slug:string}
   return <main>
     <section className="product-detail-hero">
       <div className="container product-detail-grid">
-        <div className="product-detail-image"><Image src={p.image} alt={p.name} fill priority sizes="(max-width:900px) 92vw, 50vw" style={{objectFit:"contain"}}/></div>
+        <div className="product-detail-image"><img src={p.image} alt={p.name} className="product-detail-image-element" loading="eager"/></div>
         <div className="product-detail-copy">
           <div className="eyebrow">{p.manufacturer} · {p.category}</div>
           <h1>{p.name}</h1>
