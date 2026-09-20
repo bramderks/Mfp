@@ -1,3 +1,4 @@
+# Archives the official Kyocera datasheets used as source material for the ISELTO product catalogue.
 name: Archive Kyocera brochures
 
 on:
@@ -45,11 +46,12 @@ jobs:
                   f=re.search(r'"fileName":"([^"]*'+re.escape(token)+r'[^"}]*)"',obj,re.I)
                   if m and f: candidates.append((urljoin(page,m.group(1)),f.group(1)))
               if not candidates:
-                  # Fallback: locate the token near any PDF download link in the page source.
                   for m in re.finditer(re.escape(token),source,re.I):
                       window=source[max(0,m.start()-5000):m.start()+5000]
                       dm=re.search(r'"dcLink":"([^"]+\\.pdf)"',window,re.I)
-                      if dm:\n                          candidates.append((urljoin(page,dm.group(1)),token+".pdf")); break
+                      if dm:
+                          candidates.append((urljoin(page,dm.group(1)),token+".pdf"))
+                          break
               if not candidates: raise SystemExit(f"Could not locate datasheet for {slug}")
               pdf_url,_=candidates[0]
               data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=90).read()
@@ -57,7 +59,7 @@ jobs:
               (out/target).write_bytes(data)
               rows.append(f"{slug}|{pdf_url}")
               print(f"Archived {slug}: {pdf_url}")
-          (out/"SOURCES.txt").write_text("\\n".join(rows)+"\\n",encoding="utf-8")
+          (out/"SOURCES.txt").write_text("\n".join(rows)+"\n",encoding="utf-8")
           PY
       - name: Commit archived brochures
         run: |
