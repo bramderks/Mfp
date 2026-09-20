@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main className="container" style={{padding:"120px 24px"}}><div className="eyebrow">404</div><h1 style={{fontSize:56,color:"var(--navy)"}}>Pagina niet gevonden</h1><p>De pagina die u zoekt bestaat niet.</p><Link className="btn btn-primary" href="/">Naar de homepage</Link></main>}
