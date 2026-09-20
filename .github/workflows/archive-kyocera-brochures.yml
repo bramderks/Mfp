@@ -15,40 +15,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download official datasheets
-        env:
-          PAGES: |
-            taskalfa-mz7001i|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ7001I.html|taskalfa-mz7001i.pdf
-            ecosys-ma3500cix|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/ECOSYSMA3500CIX.html|ecosys-ma3500cix.pdf
-            taskalfa-308ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA308CI.html|taskalfa-308ci.pdf
-            taskalfa-358ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA358CI.html|taskalfa-358ci.pdf
-            taskalfa-408ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA408CI.html|taskalfa-408ci.pdf
-            taskalfa-508ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA508CI.html|taskalfa-508ci.pdf
-            taskalfa-7353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA7353CI.html|taskalfa-7353ci.pdf
-            taskalfa-8353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA8353CI.html|taskalfa-8353ci.pdf
         run: |
-          python - <<'PY'
-          import html, os, re
-          from pathlib import Path
-          from urllib.parse import urljoin
-          from urllib.request import Request, urlopen
-
-          out=Path("brochures"); out.mkdir(exist_ok=True); rows=[]
-          for line in os.environ["PAGES"].strip().splitlines():
-              slug,page,target=line.split("|")
-              source=urlopen(Request(page,headers={"User-Agent":"Mozilla/5.0"}),timeout=30).read().decode("utf-8","ignore")
-              links=[]
-              for match in re.findall(r'''(?:href|data-href|data-url)=["']([^"']+)["']''',source,re.I):
-                  href=html.unescape(match)
-                  if ".pdf" in href.lower(): links.append(urljoin(page,href))
-              links=list(dict.fromkeys(links)); candidates=[u for u in links if "datasheet" in u.lower()]
-              if not candidates: candidates=links
-              if not candidates: raise SystemExit(f"No PDF link found for {slug} on {page}")
-              pdf_url=candidates[0]
-              data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=60).read()
-              if not data.startswith(b"%PDF"): raise SystemExit(f"Not a PDF: {pdf_url}")
-              (out/target).write_bytes(data); rows.append(f"{slug}|{pdf_url}"); print(f"Downloaded {slug}: {pdf_url}")
-          (out/"SOURCES.txt").write_text("\n".join(rows)+"\n",encoding="utf-8")
-          PY
+          set -euo pipefail
+          mkdir -p brochures
+          download() {
+            url="$1"; file="$2"
+            echo "Downloading $file"
+            curl --fail --location --retry 3 --retry-all-errors --user-agent "Mozilla/5.0" "$url" -o "brochures/$file"
+            test -s "brochures/$file"
+            head -c 4 "brochures/$file" | grep -q "%PDF"
+          }
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ7001i_pdf.download.pdf" "taskalfa-mz7001i.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_ECOSYS_MA3500cix_pdf.download.pdf" "ecosys-ma3500cix.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_308ci_nl_pdf.download.pdf" "taskalfa-308ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_358ci_nl_pdf.download.pdf" "taskalfa-358ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_408ci_nl_pdf.download.pdf" "taskalfa-408ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_508ci_nl_pdf.download.pdf" "taskalfa-508ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_7353ci_nl_pdf.download.pdf" "taskalfa-7353ci.pdf"
+          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_8353ci_nl_pdf.download.pdf" "taskalfa-8353ci.pdf"
+          cat > brochures/SOURCES.txt <<'EOF'
+          taskalfa-mz7001i|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ7001I.html
+          ecosys-ma3500cix|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/ECOSYSMA3500CIX.html
+          taskalfa-308ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA308CI.html
+          taskalfa-358ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA358CI.html
+          taskalfa-408ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA408CI.html
+          taskalfa-508ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA508CI.html
+          taskalfa-7353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA7353CI.html
+          taskalfa-8353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA8353CI.html
+          EOF
       - name: Commit archived brochures
         run: |
           git config user.name "github-actions[bot]"
