@@ -1,95 +1,15 @@
 import Link from "next/link";
-import { brand } from "@/lib/brand";
+import {brand} from "@/lib/brand";
 
-export const metadata = {
-  title: "Over ISELTO",
-  description: "De missie, visie en werkwijze van MFP ISELTO."
-};
+export const metadata={title:"Over ISELTO",description:"Maak kennis met MFP ISELTO, onze visie, waarden en manier van werken."};
 
-export default function OverIselto() {
-  return (
-    <main>
-      <section className="dark-hero">
-        <div className="container hero-copy">
-          <div className="eyebrow eyebrow-light">MFP ISELTO</div>
-          <h1>Techniek die werkt voor uw organisatie.</h1>
-          <p>
-            ISELTO is gebouwd vanuit jarenlange ervaring in de printbranche.
-            We combineren die praktijkkennis met moderne print-, scan- en
-            documentoplossingen.
-          </p>
-        </div>
-      </section>
-
-      <section className="container editorial-section">
-        <div className="eyebrow">ONZE MISSIE</div>
-        <h2>{brand.mission}</h2>
-        <p className="lead">
-          Wij geloven dat een multifunctional pas echt waardevol is wanneer
-          techniek, mensen en processen goed op elkaar aansluiten.
-        </p>
-      </section>
-
-      <section className="split-section">
-        <div className="container split-grid">
-          <div>
-            <div className="eyebrow">ONZE VISIE</div>
-            <h2>Van printapparaat naar slimme documentpartner.</h2>
-          </div>
-          <div>
-            <p className="large-copy">{brand.vision}</p>
-            <p>{brand.promise}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="container editorial-section">
-        <div className="eyebrow">WAAR WE VOOR STAAN</div>
-        <h2>Vier uitgangspunten in alles wat we doen.</h2>
-        <div className="value-grid">
-          {brand.values.map((value) => (
-            <article className="value-card" key={value.title}>
-              <h3>{value.title}</h3>
-              <p>{value.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="strategy-section">
-        <div className="container">
-          <div className="eyebrow eyebrow-light">ONZE STRATEGIE</div>
-          <h2>Van behoefte naar een oplossing die blijft werken.</h2>
-          <p className="strategy-intro">
-            Onze aanpak is bewust praktisch: eerst begrijpen, daarna kiezen,
-            goed implementeren en vervolgens blijven verbeteren.
-          </p>
-          <div className="strategy-grid">
-            {brand.strategy.map((step) => (
-              <article key={step.title}>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container cta-section">
-        <div className="cta-panel">
-          <div>
-            <div className="eyebrow eyebrow-light">25 JAAR ERVARING</div>
-            <h2>Benieuwd wat dit voor uw organisatie betekent?</h2>
-            <p>
-              Bespreek uw huidige situatie, volumes en wensen. Vanuit daar
-              bepalen we samen welke oplossing past.
-            </p>
-          </div>
-          <Link className="btn btn-light" href="/offerte">
-            Plan een adviesgesprek
-          </Link>
-        </div>
-      </section>
-    </main>
-  );
+export default function About(){
+ return <main>
+  <section className="dark-hero about-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">OVER ISELTO</div><h1>25 jaar printkennis. Nu onder één naam.</h1><p>ISELTO combineert praktijkervaring in de printbranche met moderne multifunctionals, documentoplossingen en persoonlijke service.</p></div></section>
+  <section className="container editorial-section"><div className="about-story"><div><div className="experience-number">25</div><div className="experience-label">JAAR ERVARING<br/>IN DE PRINTBRANCHE</div></div><div><div className="eyebrow">WAAROM ISELTO</div><h2>Techniek moet begrijpelijk zijn en gewoon werken.</h2><p className="lead">Een organisatie heeft geen behoefte aan een apparaat op zichzelf. U wilt dat medewerkers kunnen werken, documenten veilig op de juiste plek komen en kosten beheersbaar blijven.</p><p>Daarom begint onze aanpak bij de praktijk. We kijken naar volumes, processen, gebruikers en toekomstplannen en vertalen dat naar een oplossing die daarbij past.</p></div></div></section>
+  <section className="split-section"><div className="container split-grid"><div><div className="eyebrow">ONZE MISSIE</div><h2>{brand.mission}</h2></div><div><div className="eyebrow">ONZE VISIE</div><p className="large-copy">{brand.vision}</p><p>{brand.promise}</p></div></div></section>
+  <section className="container editorial-section"><div className="eyebrow">WAAR WE VOOR STAAN</div><h2>Vier uitgangspunten in alles wat we doen.</h2><div className="value-grid">{brand.values.map(v=><article className="value-card" key={v.title}><h3>{v.title}</h3><p>{v.text}</p></article>)}</div></section>
+  <section className="strategy-section"><div className="container"><div className="eyebrow eyebrow-light">ONZE WERKWIJZE</div><h2>Van behoefte naar oplossing.</h2><p className="strategy-intro">Begrijpen. Adviseren. Inrichten. Optimaliseren.</p><div className="strategy-grid">{brand.strategy.map(s=><article key={s.title}><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>
+  <section className="container cta-section"><div className="cta-panel"><div><div className="eyebrow eyebrow-light">KENNISMAKEN</div><h2>Vertel ons wat u nodig heeft.</h2><p>We maken graag kennis met uw organisatie en uw huidige printomgeving.</p></div><Link className="btn btn-light" href="/contact">Neem contact op</Link></div></section>
+ </main>
 }
