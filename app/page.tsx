@@ -2,60 +2,27 @@ import Link from "next/link";
 import {products} from "@/lib/products";
 import {brand} from "@/lib/brand";
 
+const stats=[["25+","jaar ervaring"],["A4 & A3","MFP portfolio"],["1","persoonlijk aanspreekpunt"],["360°","print & document"]];
+
 export default function Home(){
-  return <main>
-    <section className="dark-hero home-hero">
-      <div className="container hero-grid">
-        <div className="hero-copy">
-          <div className="eyebrow eyebrow-light">MFP ISELTO · PRINT · SCAN · MANAGE</div>
-          <h1>Print slimmer.<br/>Werk beter.</h1>
-          <p>Professionele multifunctionals, printers en documentoplossingen voor organisaties die betrouwbaar en efficiënt willen werken.</p>
-          <div className="hero-actions">
-            <Link className="btn btn-light" href="/producten">Bekijk producten</Link>
-            <Link className="btn btn-outline-light" href="/offerte">Vraag advies</Link>
-          </div>
-        </div>
-        <div className="hero-image">
-          <img src={products[1].image} alt="Professionele multifunctional" className="home-product-image" loading="eager"/>
-        </div>
-      </div>
-    </section>
+ return <main>
+  <section className="home-hero">
+   <div className="container hero-grid">
+    <div className="hero-copy"><div className="eyebrow eyebrow-light">MFP ISELTO · PRINT · SCAN · MANAGE</div><h1>Print slimmer.<br/><span>Werk beter.</span></h1><p>Professionele multifunctionals en documentoplossingen voor organisaties die betrouwbaar, veilig en efficiënt willen werken.</p><div className="hero-actions"><Link className="btn btn-light" href="/producten">Bekijk MFP's</Link><Link className="btn btn-outline-light" href="/offerte">Vraag advies</Link></div><div className="hero-note">25 jaar ervaring in de printbranche</div></div>
+    <div className="hero-product"><div className="hero-product-label">UITGELICHT</div><img src={products[1].image} alt={products[1].name} loading="eager"/><div className="hero-product-caption"><span>{products[1].category}</span><strong>{products[1].name}</strong><small>{products[1].speed} · {products[1].format}</small></div></div>
+   </div>
+  </section>
 
-    <section className="container editorial-section">
-      <div className="eyebrow">ERVARING & AANPAK</div>
-      <h2>{brand.experience}. Kennis die we vertalen naar een oplossing die past.</h2>
-      <p className="lead">Geen machine om de machine, maar een oplossing die aansluit op uw volumes, processen, medewerkers en toekomstplannen.</p>
-      <Link className="text-link" href="/over-iselto">Ontdek onze missie, visie en strategie →</Link>
-    </section>
+  <section className="stat-strip"><div className="container stat-grid">{stats.map(([n,l])=><div key={l}><strong>{n}</strong><span>{l}</span></div>)}</div></section>
 
-    <section className="split-section">
-      <div className="container split-grid">
-        <div><div className="eyebrow">ONZE MISSIE</div><h2>Van printapparaat naar een oplossing die dagelijks waarde toevoegt.</h2></div>
-        <div><p className="large-copy">{brand.mission}</p><Link className="btn btn-primary" href="/oplossingen">Bekijk onze oplossingen</Link></div>
-      </div>
-    </section>
+  <section className="container editorial-section home-intro"><div className="section-intro"><div><div className="eyebrow">ERVARING & AANPAK</div><h2>Geen machine om de machine.</h2></div><div><p className="lead">We beginnen bij uw organisatie. Hoeveel print u? Wie gebruikt de apparatuur? Welke documenten moeten veilig blijven? En waar kan het proces slimmer?</p><Link className="text-link" href="/over-iselto">Meer over ISELTO →</Link></div></div></section>
 
-    <section className="container editorial-section">
-      <div className="eyebrow">PRODUCTEN</div>
-      <h2>De juiste MFP voor uw organisatie.</h2>
-      <p className="lead">Van compacte A4-oplossingen tot krachtige A3-systemen. Bekijk, vergelijk en vraag gericht advies.</p>
-      <div className="product-grid">{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card" key={p.slug}><div className="product-image"><img src={p.image} alt={p.name} className="product-image-element" loading="lazy"/></div><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><b>Bekijk product →</b></div></Link>)}</div>
-    </section>
+  <section className="light-product-section"><div className="container"><div className="section-head"><div><div className="eyebrow">MFP PORTFOLIO</div><h2>De juiste machine begint met de juiste vraag.</h2></div><Link className="btn btn-secondary" href="/producten">Alle MFP's bekijken</Link></div><div className="product-grid">{products.slice(0,3).map(p=><Link href={"/producten/"+p.slug} className="card product-card" key={p.slug}><div className="product-image"><img src={p.image} alt={p.name} className="product-image-element" loading="lazy"/></div><div className="product-copy"><div className="eyebrow">{p.category}</div><h3>{p.name}</h3><p>{p.description}</p><div className="product-specs"><span>{p.speed}</span><span>{p.format}</span></div><b>Bekijk product →</b></div></Link>)}</div></div></section>
 
-    <section className="strategy-section">
-      <div className="container">
-        <div className="eyebrow eyebrow-light">ONZE WERKWIJZE</div>
-        <h2>Van behoefte naar oplossing.</h2>
-        <p className="strategy-intro">Begrijpen. Adviseren. Inrichten. Optimaliseren.</p>
-        <div className="strategy-grid">{brand.strategy.map(step=><article key={step.title}><h3>{step.title}</h3><p>{step.text}</p></article>)}</div>
-      </div>
-    </section>
+  <section className="split-section"><div className="container split-grid"><div><div className="eyebrow">ONZE MISSIE</div><h2>Van printapparaat naar een oplossing die dagelijks waarde toevoegt.</h2></div><div><p className="large-copy">{brand.mission}</p><Link className="btn btn-primary" href="/oplossingen">Ontdek oplossingen</Link></div></div></section>
 
-    <section className="container cta-section">
-      <div className="cta-panel">
-        <div><div className="eyebrow eyebrow-light">PERSOONLIJK ADVIES</div><h2>Welke MFP past bij u?</h2><p>Vertel ons wat u nodig heeft. Wij helpen u de juiste oplossing samenstellen.</p></div>
-        <Link className="btn btn-light" href="/offerte">Start adviesaanvraag</Link>
-      </div>
-    </section>
-  </main>
+  <section className="strategy-section"><div className="container"><div className="eyebrow eyebrow-light">ONZE WERKWIJZE</div><h2>Van behoefte naar oplossing.</h2><p className="strategy-intro">Begrijpen. Adviseren. Inrichten. Optimaliseren.</p><div className="strategy-grid">{brand.strategy.map(s=><article key={s.title}><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>
+
+  <section className="container editorial-section"><div className="feature-banner"><div><div className="eyebrow">HULP BIJ UW KEUZE</div><h2>Weet u al welke MFP u nodig heeft?</h2><p>Bekijk specificaties, vergelijk modellen of vraag direct een offerte aan.</p></div><div className="feature-actions"><Link className="btn btn-primary" href="/vergelijker">Vergelijk MFP's</Link><Link className="text-link" href="/offerte">Ik wil advies →</Link></div></div></section>
+ </main>
 }
