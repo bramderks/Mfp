@@ -23,6 +23,6 @@ export default function Home(){
 
   <section className="strategy-section"><div className="container"><div className="eyebrow eyebrow-light">ONZE WERKWIJZE</div><h2>Van behoefte naar oplossing.</h2><p className="strategy-intro">Begrijpen. Adviseren. Inrichten. Optimaliseren.</p><div className="strategy-grid">{brand.strategy.map(s=><article key={s.title}><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>
 
-  <section className="container editorial-section"><div className="feature-banner"><div><div className="eyebrow">HULP BIJ UW KEUZE</div><h2>Weet u al welke MFP u nodig heeft?</h2><p>Bekijk specificaties, vergelijk modellen of vraag direct een offerte aan.</p></div><div className="feature-actions"><Link className="btn btn-primary" href="/vergelijker">Vergelijk MFP's</Link><Link className="text-link" href="/offerte">Ik wil advies →</Link></div></div></section>
+  <section className="container editorial-section"><div className="feature-banner"><div><div className="eyebrow">HULP BIJ UW KEUZE</div><h2>Weet u al welke MFP u nodig heeft?</h2><p>Bekijk specificaties, vergelijk modellen of vraag direct een offerte aan.</p></div><div className="feature-actions"><Link className="btn btn-primary" href="/producten#mfp-kiezen">Vind mijn MFP</Link><Link className="text-link" href="/vergelijker">Vergelijk modellen →</Link><Link className="text-link" href="/offerte">Ik wil advies →</Link></div></div></section>
  </main>
 }
