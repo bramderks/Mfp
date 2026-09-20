@@ -3,7 +3,7 @@ import {notFound} from "next/navigation";
 import {products} from "@/lib/products";
 
 export function generateStaticParams(){return products.map(p=>({slug:p.slug}));}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=products.find(x=>x.slug===slug);return p?{title:p.name,description:p.description}:{};}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=products.find(x=>x.slug===slug);return p?{title:p.name,description:p.description,alternates:{canonical:"/producten/"+p.slug},openGraph:{title:p.name+" | MFP ISELTO",description:p.description,type:"website"}}:{};}
 
 export default async function ProductDetail({params}:{params:Promise<{slug:string}>}){
  const {slug}=await params;const p=products.find(x=>x.slug===slug);if(!p)notFound();
