@@ -17,32 +17,48 @@ jobs:
       - name: Download official datasheets
         run: |
           set -euo pipefail
-          mkdir -p brochures
-          download() {
-            url="$1"; file="$2"
-            echo "Downloading $file"
-            curl --fail --location --retry 3 --retry-all-errors --user-agent "Mozilla/5.0" "$url" -o "brochures/$file"
-            test -s "brochures/$file"
-            head -c 4 "brochures/$file" | grep -q "%PDF"
-          }
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_MZ7001i_pdf.download.pdf" "taskalfa-mz7001i.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_ECOSYS_MA3500cix_pdf.download.pdf" "ecosys-ma3500cix.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_308ci_nl_pdf.download.pdf" "taskalfa-308ci.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_358ci_nl_pdf.download.pdf" "taskalfa-358ci.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_408ci_nl_pdf.download.pdf" "taskalfa-408ci.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_508ci_nl_pdf.download.pdf" "taskalfa-508ci.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_7353ci_nl_pdf.download.pdf" "taskalfa-7353ci.pdf"
-          download "https://www.kyoceradocumentsolutions.nl/content/dam/download-center-cf/nl/documents/datasheet/Datasheet_TASKalfa_8353ci_nl_pdf.download.pdf" "taskalfa-8353ci.pdf"
-          cat > brochures/SOURCES.txt <<'EOF'
-          taskalfa-mz7001i|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFAMZ7001I.html
-          ecosys-ma3500cix|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/ECOSYSMA3500CIX.html
-          taskalfa-308ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA308CI.html
-          taskalfa-358ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA358CI.html
-          taskalfa-408ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA408CI.html
-          taskalfa-508ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA508CI.html
-          taskalfa-7353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA7353CI.html
-          taskalfa-8353ci|https://www.kyoceradocumentsolutions.nl/nl/products/mfp/TASKALFA8353CI.html
-          EOF
+          python - <<'PY'
+          import html, re
+          from pathlib import Path
+          from urllib.parse import urljoin
+          from urllib.request import Request, urlopen
+
+          products = [
+            ("taskalfa-mz7001i", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQU1aNzAwMUk%3D.html", "MZ7001i", "taskalfa-mz7001i.pdf"),
+            ("ecosys-ma3500cix", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9FQ09TWVNNQTM1MDBDSVg%3D.html", "MA3500cix", "ecosys-ma3500cix.pdf"),
+            ("taskalfa-308ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTMwOENJ.html", "308ci", "taskalfa-308ci.pdf"),
+            ("taskalfa-358ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTM1OENJ.html", "358ci", "taskalfa-358ci.pdf"),
+            ("taskalfa-408ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTQwOENJ.html", "408ci", "taskalfa-408ci.pdf"),
+            ("taskalfa-508ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTUwOENJ.html", "508ci", "taskalfa-508ci.pdf"),
+            ("taskalfa-7353ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTczNTNDSQ%3D%3D.html", "7353ci", "taskalfa-7353ci.pdf"),
+            ("taskalfa-8353ci", "https://www.kyoceradocumentsolutions.nl/nl/support/downloads.name-L25sL25sL21mcC9UQVNLQUxGQTgzNTNDSQ%3D%3D.html", "8353ci", "taskalfa-8353ci.pdf"),
+          ]
+          out=Path("brochures"); out.mkdir(exist_ok=True)
+          rows=[]
+          for slug,page,token,target in products:
+              source=urlopen(Request(page,headers={"User-Agent":"Mozilla/5.0"}),timeout=45).read().decode("utf-8","ignore")
+              source=html.unescape(source)
+              objects=re.findall(r'\{[^{}]{0,12000}?"title":"[^"]*Datasheet[^"}]*"[^{}]{0,12000}?\}',source,re.I)
+              candidates=[]
+              for obj in objects:
+                  m=re.search(r'"dcLink":"([^"]+\\.pdf)"',obj,re.I)
+                  f=re.search(r'"fileName":"([^"]*'+re.escape(token)+r'[^"}]*)"',obj,re.I)
+                  if m and f: candidates.append((urljoin(page,m.group(1)),f.group(1)))
+              if not candidates:
+                  # Fallback: locate the token near any PDF download link in the page source.
+                  for m in re.finditer(re.escape(token),source,re.I):
+                      window=source[max(0,m.start()-5000):m.start()+5000]
+                      dm=re.search(r'"dcLink":"([^"]+\\.pdf)"',window,re.I)
+                      if dm: candidates.append((urljoin(page,dm.group(1)),token+".pdf"); break
+              if not candidates: raise SystemExit(f"Could not locate datasheet for {slug}")
+              pdf_url,_=candidates[0]
+              data=urlopen(Request(pdf_url,headers={"User-Agent":"Mozilla/5.0"}),timeout=90).read()
+              if not data.startswith(b"%PDF"): raise SystemExit(f"Not a PDF for {slug}: {pdf_url}")
+              (out/target).write_bytes(data)
+              rows.append(f"{slug}|{pdf_url}")
+              print(f"Archived {slug}: {pdf_url}")
+          (out/"SOURCES.txt").write_text("\\n".join(rows)+"\\n",encoding="utf-8")
+          PY
       - name: Commit archived brochures
         run: |
           git config user.name "github-actions[bot]"
