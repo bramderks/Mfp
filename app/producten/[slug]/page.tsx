@@ -1,1 +1,41 @@
-import {notFound} from "next/navigation";import Link from "next/link";import Image from "next/image";import {getProduct,products} from "@/lib/products";export function generateStaticParams(){return products.map(p=>({slug:p.slug}))}export default async function ProductPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=getProduct(slug);if(!p)return notFound();return <main><section style={{background:"var(--light)",padding:"65px 0"}}><div className="container" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:60,alignItems:"center"}}><div style={{position:"relative",height:470,borderRadius:10,overflow:"hidden"}}><Image src={p.image} alt={p.name} fill style={{objectFit:"cover"}} priority sizes="50vw"/></div><div><div className="eyebrow">{p.category}</div><h1 style={{fontSize:52,lineHeight:1.05,color:"var(--navy)"}}>{p.name}</h1><p style={{fontSize:19,lineHeight:1.7,color:"#5d6874"}}>{p.description}</p><div style={{display:"flex",gap:25,margin:"28px 0",flexWrap:"wrap"}}><b>{p.speed}</b><b>{p.format}</b><b>{p.colour?"Kleur":"Zwart-wit"}</b></div><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Offerte aanvragen</Link></div></div></section><section className="container" style={{padding:"75px 0"}}><div className="eyebrow">SPECIFICATIES</div><h2 style={{fontSize:38,color:"var(--navy)"}}>Belangrijkste kenmerken</h2><div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:15,maxWidth:800,marginTop:25}}>{p.features.map(f=><div key={f} className="card" style={{padding:20}}>✓ {f}</div>)}</div></section></main>}
+import {notFound} from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import {getProduct,products} from "@/lib/products";
+
+export function generateStaticParams(){return products.map(p=>({slug:p.slug}))}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params; const p=getProduct(slug);
+  return p?{title:p.name,description:p.description}:{title:"MFP"};
+}
+
+export default async function ProductPage({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params; const p=getProduct(slug); if(!p)return notFound();
+  return <main>
+    <section className="product-detail-hero">
+      <div className="container product-detail-grid">
+        <div className="product-detail-image"><Image src={p.image} alt={p.name} fill priority sizes="(max-width:900px) 92vw, 50vw" style={{objectFit:"contain"}}/></div>
+        <div className="product-detail-copy">
+          <div className="eyebrow">{p.manufacturer} · {p.category}</div>
+          <h1>{p.name}</h1>
+          <p>{p.description}</p>
+          <div className="product-detail-stats"><span>{p.speed}</span><span>{p.format}</span><span>{p.colour?"Kleur":"Zwart-wit"}</span></div>
+          <div className="product-detail-actions"><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Offerte aanvragen</Link><a className="btn btn-secondary" href={p.brochurePath} target="_blank" rel="noreferrer">Brochure downloaden</a></div>
+          <a className="source-link" href={p.sourceUrl} target="_blank" rel="noreferrer">Bekijk productinformatie bij Kyocera →</a>
+        </div>
+      </div>
+    </section>
+    <section className="container product-spec-section">
+      <div className="eyebrow">TECHNISCHE SPECIFICATIES</div>
+      <h2>Belangrijkste specificaties</h2>
+      <div className="spec-table">{p.specs.map(s=><div className="spec-row" key={s.label}><strong>{s.label}</strong><span>{s.value}</span></div>)}</div>
+    </section>
+    <section className="container product-feature-section">
+      <div className="eyebrow">KENMERKEN</div>
+      <h2>Wat deze MFP biedt</h2>
+      <div className="feature-grid">{p.features.map(f=><div className="card feature-card" key={f}><span>✓</span><strong>{f}</strong></div>)}</div>
+    </section>
+    <section className="split-section product-cta-section"><div className="container split-grid"><div><div className="eyebrow">ISELTO ADVIES</div><h2>Past deze MFP bij uw organisatie?</h2></div><div><p className="large-copy">Specificaties zijn een goed begin. Wij kijken daarnaast naar uw printvolume, gebruikers, scanworkflows, beveiliging en gewenste dienstverlening.</p><Link className="btn btn-primary" href={"/offerte?product="+p.slug}>Vraag een offerte aan</Link></div></div></section>
+  </main>;
+}
