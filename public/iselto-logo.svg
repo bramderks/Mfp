@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-labelledby="title desc">
+  <title id="title">MFP ISELTO</title>
+  <desc id="desc">MFP ISELTO logo voor print, scan en documentoplossingen.</desc>
+  <rect width="760" height="180" fill="#fff"/>
+  <g transform="translate(20 28)">
+    <path d="M0 105V0h88l38 38v83l-38-15V48H28v57z" fill="#202830"/>
+    <path d="M35 0h62l38 38v83h-28V50H63v45l-28-8z" fill="#1676c8"/>
+    <path d="M35 95l28 8V50H35z" fill="#fff"/>
+  </g>
+  <text x="170" y="88" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="800" fill="#202830" letter-spacing="-3">MFP</text>
+  <text x="174" y="137" font-family="Arial,Helvetica,sans-serif" font-size="40" font-weight="500" fill="#1676c8" letter-spacing="13">ISELTO</text>
+  <line x1="440" y1="28" x2="440" y2="148" stroke="#b9c0c6" stroke-width="2"/>
+  <text x="470" y="57" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#202830" letter-spacing="5">PRINT</text>
+  <text x="470" y="84" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#202830" letter-spacing="5">SCAN</text>
+  <text x="470" y="111" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#202830" letter-spacing="4">MANAGE</text>
+  <text x="470" y="138" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#202830" letter-spacing="3">TOGETHER</text>
+</svg>
