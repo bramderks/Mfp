@@ -9,39 +9,15 @@ export const brand = {
   promise:
     "Persoonlijk advies, passende techniek en service die verder gaat dan alleen de machine.",
   values: [
-    {
-      title: "Persoonlijk",
-      text: "We luisteren eerst naar de organisatie en adviseren vanuit de praktijk."
-    },
-    {
-      title: "Deskundig",
-      text: "Ervaring en technische kennis vertalen we naar duidelijke keuzes zonder onnodige complexiteit."
-    },
-    {
-      title: "Betrouwbaar",
-      text: "Afspraken, continuïteit en bereikbare service vormen de basis van onze samenwerking."
-    },
-    {
-      title: "Praktisch",
-      text: "Elke oplossing moet in de dagelijkse praktijk werken en aantoonbaar waarde toevoegen."
-    }
+    {title:"Persoonlijk",text:"We luisteren eerst naar de organisatie en adviseren vanuit de praktijk."},
+    {title:"Deskundig",text:"Ervaring en technische kennis vertalen we naar duidelijke keuzes zonder onnodige complexiteit."},
+    {title:"Betrouwbaar",text:"Afspraken, continuïteit en bereikbare service vormen de basis van onze samenwerking."},
+    {title:"Praktisch",text:"Elke oplossing moet in de dagelijkse praktijk werken en aantoonbaar waarde toevoegen."}
   ],
   strategy: [
-    {
-      title: "1. Begrijpen",
-      text: "We brengen volumes, werkprocessen, gebruikers, locaties, beveiliging en toekomstige behoeften in kaart."
-    },
-    {
-      title: "2. Adviseren",
-      text: "We vertalen die informatie naar een overzichtelijke keuze van machines, software en dienstverlening."
-    },
-    {
-      title: "3. Inrichten",
-      text: "We zorgen voor installatie, configuratie, koppelingen en instructie zodat de oplossing goed wordt gebruikt."
-    },
-    {
-      title: "4. Optimaliseren",
-      text: "We blijven kijken naar verbruik, prestaties, documentstromen en veranderingen binnen de organisatie."
-    }
+    {title:"1. Begrijpen",text:"We brengen volumes, werkprocessen, gebruikers, locaties, beveiliging en toekomstige behoeften in kaart."},
+    {title:"2. Adviseren",text:"We vertalen die informatie naar een overzichtelijke keuze van machines, software en dienstverlening."},
+    {title:"3. Inrichten",text:"We zorgen voor installatie, configuratie, koppelingen en instructie zodat de oplossing goed wordt gebruikt."},
+    {title:"4. Optimaliseren",text:"We blijven kijken naar verbruik, prestaties, documentstromen en veranderingen binnen de organisatie."}
   ]
 } as const;
