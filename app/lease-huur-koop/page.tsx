@@ -6,7 +6,7 @@ const options=[
  {title:"Kopen",tag:"Direct eigendom",text:"Bij koop wordt de apparatuur eigendom van uw organisatie. Ook dan kunnen service, onderhoud en ondersteuning worden ingericht.",points:["Direct eigendom","Geen leaseconstructie nodig","Servicecontract mogelijk"],href:"/mfp-kopen"}
 ];
 
-export const metadata={title:"MFP leasen, huren of kopen",description:"Vergelijk MFP leasen, huren en kopen en ontdek welke contractvorm bij uw organisatie en printerpark past."};
+export const metadata={title:"MFP leasen, huren of kopen",description:"Vergelijk MFP leasen, huren en kopen en ontdek welke contractvorm bij uw organisatie en printerpark past.",alternates:{canonical:"/lease-huur-koop"},openGraph:{type:"website",title:"MFP leasen, huren of kopen",description:"Vergelijk MFP leasen, huren en kopen en ontdek welke contractvorm bij uw organisatie en printerpark past.",url:"https://mfp.iselto.nl/lease-huur-koop"}};
 
 export default function LeaseRentBuy(){
  return <main>
