@@ -1,35 +1,5 @@
 "use client";
-
 import {useMemo,useState} from "react";
 import Link from "next/link";
-
-const euro=(value:number)=>new Intl.NumberFormat("nl-NL",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(value);
-
-export default function TcoCalculator(){
-  const [machines,setMachines]=useState(3);
-  const [monthlyLease,setMonthlyLease]=useState(450);
-  const [monthlyPrint,setMonthlyPrint]=useState(650);
-  const [monthlyService,setMonthlyService]=useState(275);
-  const [monthlySupplies,setMonthlySupplies]=useState(175);
-  const result=useMemo(()=>{
-    const monthly=monthlyLease+monthlyPrint+monthlyService+monthlySupplies;
-    return {monthly,annual:monthly*12,perMachine:monthly/machines};
-  },[machines,monthlyLease,monthlyPrint,monthlyService,monthlySupplies]);
-
-  return <div className="tco-tool">
-    <div className="tco-fields">
-      <label className="field"><span>Aantal printers / MFP's</span><input className="input" type="number" min={1} max={200} value={machines} onChange={e=>setMachines(Math.max(1,Math.min(200,Number(e.target.value)||1)))}/></label>
-      <label className="field"><span>Lease / afschrijving per maand</span><input className="input" type="number" min={0} step={25} value={monthlyLease} onChange={e=>setMonthlyLease(Math.max(0,Number(e.target.value)||0))}/></label>
-      <label className="field"><span>Printkosten per maand</span><input className="input" type="number" min={0} step={25} value={monthlyPrint} onChange={e=>setMonthlyPrint(Math.max(0,Number(e.target.value)||0))}/></label>
-      <label className="field"><span>Service / onderhoud per maand</span><input className="input" type="number" min={0} step={25} value={monthlyService} onChange={e=>setMonthlyService(Math.max(0,Number(e.target.value)||0))}/></label>
-      <label className="field"><span>Toner / supplies per maand</span><input className="input" type="number" min={0} step={25} value={monthlySupplies} onChange={e=>setMonthlySupplies(Math.max(0,Number(e.target.value)||0))}/></label>
-    </div>
-    <div className="tco-result">
-      <div><span>Indicatieve maandlast</span><strong>{euro(result.monthly)}</strong></div>
-      <div><span>Indicatieve jaarlast</span><strong>{euro(result.annual)}</strong></div>
-      <div><span>Per apparaat / maand</span><strong>{euro(result.perMachine)}</strong></div>
-    </div>
-    <div className="tco-note"><strong>Dit is een rekentool, geen offerte.</strong><span>Vul uw eigen bedragen in. Werkelijke kosten hangen onder meer af van volumes, contracten, kleur/zwart-wit, apparatuur, service en verbruik.</span></div>
-    <Link className="btn btn-primary" href="/offerte">Laat mijn printerpark analyseren</Link>
-  </div>;
-}
+const euro=(v:number)=>new Intl.NumberFormat("nl-NL",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(v);
+export default function TcoCalculator(){const[pages,setPages]=useState(6500);const[colour,setColour]=useState(25);const[devices,setDevices]=useState(3);const[other,setOther]=useState(450);const r=useMemo(()=>{const c=pages*colour/100,m=pages-c;const print=c*.03+m*.0085;const current=print+other;const low=current*.2,high=current*.4;return{current,annual:current*12,low,high,afterLow:current-high,afterHigh:current-low};},[pages,colour,devices,other]);return <div className="tco-tool"><div className="tco-fields"><label className="field"><span>Pagina's per maand</span><input className="input" type="number" min={0} step={500} value={pages} onChange={e=>setPages(Math.max(0,Number(e.target.value)||0))}/></label><label className="field"><span>Aandeel kleur</span><select className="input" value={colour} onChange={e=>setColour(Number(e.target.value))}>{[0,10,25,50,75,100].map(v=><option key={v} value={v}>{v}%</option>)}</select></label><label className="field"><span>Aantal printers / MFP's</span><input className="input" type="number" min={1} max={200} value={devices} onChange={e=>setDevices(Math.max(1,Math.min(200,Number(e.target.value)||1)))}/></label><label className="field"><span>Overige maandkosten</span><input className="input" type="number" min={0} step={50} value={other} onChange={e=>setOther(Math.max(0,Number(e.target.value)||0))}/></label></div><div className="tco-result"><div><span>Indicatieve huidige maandlast</span><strong>{euro(r.current)}</strong></div><div><span>Indicatieve jaarlast</span><strong>{euro(r.annual)}</strong></div><div><span>Mogelijke optimalisatie</span><strong>{euro(r.low)} – {euro(r.high)}</strong></div></div><div className="tco-optimised"><div><span>Indicatieve maandlast na optimalisatie</span><strong>{euro(r.afterLow)} – {euro(r.afterHigh)}</strong></div><small>Rekenindicatie. De werkelijke uitkomst hangt af van apparatuur, volumes, contracten, service, verbruik en documentprocessen.</small></div><div className="tco-note"><strong>Dit is geen offerte.</strong><span>De rekenaannames voor zwart-wit en kleur worden intern gebruikt voor de indicatie en worden niet als losse prijs op de website getoond.</span></div><Link className="btn btn-primary" href="/offerte">Laat mijn printerpark analyseren</Link></div>}
