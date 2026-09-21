@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
-export const metadata={title:"A3 multifunctionals voor bedrijven",description:"A3 multifunctionals voor zakelijke organisaties: kleur en zwart-wit, van 25 tot 70 ppm. Vergelijk onze MFP's en vraag advies of een offerte."};
+export const metadata={title:"A3 multifunctionals voor bedrijven",description:"A3 multifunctionals voor zakelijke organisaties: kleur en zwart-wit, van 25 tot 70 ppm. Vergelijk onze MFP's en vraag advies of een offerte.",alternates:{canonical:"/producten/a3-multifunctionals"},openGraph:{type:"website",title:"A3 multifunctionals voor bedrijven",description:"A3 multifunctionals voor zakelijke organisaties: kleur en zwart-wit, van 25 tot 70 ppm. Vergelijk onze MFP's en vraag advies of een offerte.",url:"https://mfp.iselto.nl/producten/a3-multifunctionals"}};
 export default function A3Page(){
  const items=products.filter(p=>p.format.includes("A3"));
  return <main>
