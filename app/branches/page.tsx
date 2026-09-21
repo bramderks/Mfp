@@ -9,7 +9,7 @@ const branches=[
  {slug:"mkb",label:"MKB",focus:"Een praktische oplossing zonder onnodige complexiteit, afgestemd op teamgrootte en printvolume.",points:["A4 of A3","Keuzehulp","Lease, huur of koop"]}
 ];
 
-export const metadata={title:"MFP per branche",description:"Zakelijke MFP-oplossingen per branche: MKB, zakelijke dienstverlening, zorg, onderwijs, industrie, techniek, handel en logistiek."};
+export const metadata={title:"MFP per branche",description:"Zakelijke MFP-oplossingen per branche: MKB, zakelijke dienstverlening, zorg, onderwijs, industrie, techniek, handel en logistiek.",alternates:{canonical:"/branches"},openGraph:{type:"website",title:"MFP per branche",description:"Zakelijke MFP-oplossingen per branche: MKB, zakelijke dienstverlening, zorg, onderwijs, industrie, techniek, handel en logistiek.",url:"https://mfp.iselto.nl/branches"}};
 
 export default function Branches(){
  return <main><section className="dark-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">BRANCHES</div><h1>Een MFP-oplossing die past bij uw branche.</h1><p>Dezelfde machine is niet automatisch de juiste oplossing voor iedere organisatie. Bekijk de aandachtspunten per branche en ontdek welke functies vaak relevant zijn.</p><div className="hero-actions"><Link className="btn btn-light" href="/mfp-kiezen">Vind uw MFP</Link><Link className="btn btn-outline-light" href="/offerte">Vraag advies</Link></div></div></section>
