@@ -8,7 +8,7 @@ const pages=[
  "/mfp-kiezen","/lease-huur-koop","/tco-scan","/oplossingen","/software","/managed-print","/diensten","/service",
  "/branches","/branches/zakelijke-dienstverlening","/branches/zorg-welzijn","/branches/onderwijs","/branches/industrie-techniek",
  "/branches/handel-logistiek","/branches/mkb","/downloads","/offerte","/contact","/vergelijker","/klantverhalen","/faq",
- "/over-iselto","/vacatures","/kennis","/kennis/mfp-kosten","/kennis/a4-of-a3-mfp","/kennis/managed-print"
+ "/over-iselto","/vacatures","/kennis","/kennis/mfp-kosten","/kennis/a4-of-a3-mfp","/kennis/managed-print","/kennis/mfp-kiezen-kantoor","/kennis/printkosten-verlagen","/kennis/mfp-kopen-leasen-huren","/kennis/printbeveiliging","/kennis/slim-archiveren-scannen","/kennis/mfp-voor-mkb","/kennis/mfp-voor-50-medewerkers"
 ];
 
 const priority:Record<string,number>={
