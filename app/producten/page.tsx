@@ -2,7 +2,7 @@ import Link from "next/link";
 import {products} from "@/lib/products";
 import MfpSelector from "@/components/MfpSelector";
 
-export const metadata={title:"Zakelijke MFP's | A4 & A3 multifunctionals",description:"Bekijk zakelijke MFP's voor bedrijven: A4 en A3, kleur en zwart-wit. Vergelijk snelheid, formaat en functies en vraag advies over lease, huur of koop."};
+export const metadata={title:"Zakelijke MFP's | A4 & A3 multifunctionals",description:"Bekijk zakelijke MFP's voor bedrijven: A4 en A3, kleur en zwart-wit. Vergelijk snelheid, formaat en functies en vraag advies over lease, huur of koop.",alternates:{canonical:"/producten"},openGraph:{type:"website",title:"Zakelijke MFP's | A4 & A3 multifunctionals",description:"Bekijk zakelijke MFP's voor bedrijven: A4 en A3, kleur en zwart-wit. Vergelijk snelheid, formaat en functies en vraag advies over lease, huur of koop.",url:"https://mfp.iselto.nl/producten"}};
 
 export default function Products(){
  const itemListJsonLd={"@context":"https://schema.org","@type":"ItemList","name":"Zakelijke MFP's van Iselto","itemListElement":products.map((p,i)=>({"@type":"ListItem","position":i+1,"name":p.name,"url":"https://mfp.iselto.nl/producten/"+p.slug}))};
