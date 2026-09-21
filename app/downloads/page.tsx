@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
 
-export const metadata={title:"Downloads",description:"Datasheets en productdocumentatie van de MFP's in het Iselto-portfolio."};
+export const metadata={title:"Downloads",description:"Datasheets en productdocumentatie van de MFP's in het Iselto-portfolio.",alternates:{canonical:"/downloads"},openGraph:{type:"website",title:"Downloads",description:"Datasheets en productdocumentatie van de MFP's in het Iselto-portfolio.",url:"https://mfp.iselto.nl/downloads"}};
 
 export default function Downloads(){
  return <main>
