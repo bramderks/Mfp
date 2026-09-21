@@ -2,7 +2,7 @@
 
 Commercial website for multifunctionals, printers and document solutions.
 
-Built with Next.js, React, TypeScript, Prisma and PostgreSQL, deployed on Vercel.
+Built with Next.js, React and TypeScript, with Neon PostgreSQL for lead storage and deployed on Vercel.
 
 ## Public routes
 - `/`
@@ -15,4 +15,4 @@ Built with Next.js, React, TypeScript, Prisma and PostgreSQL, deployed on Vercel
 - `/contact`
 
 ## Environment
-Set `DATABASE_URL` in Vercel for persistent lead storage. The public build does not require a live database connection at build time.
+Set `DATABASE_URL` and `RESEND_API_KEY` in Vercel for persistent lead storage and email notifications. The public build does not require a live database connection at build time.
