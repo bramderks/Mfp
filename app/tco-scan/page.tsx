@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TcoCalculator from "@/components/TcoCalculator";
 
-export const metadata={title:"TCO scan printerpark",description:"Bereken indicatief wat uw zakelijke printerpark per maand en per jaar kost en bespreek daarna uw totale printkosten met ISELTO."};
+export const metadata={title:"TCO scan printerpark",description:"Bereken indicatief wat uw zakelijke printerpark per maand en per jaar kost en bespreek daarna uw totale printkosten met ISELTO.",alternates:{canonical:"/tco-scan"},openGraph:{type:"website",title:"TCO scan printerpark",description:"Bereken indicatief wat uw zakelijke printerpark per maand en per jaar kost en bespreek daarna uw totale printkosten met ISELTO.",url:"https://mfp.iselto.nl/tco-scan"}};
 
 export default function TcoScan(){
  return <main>
