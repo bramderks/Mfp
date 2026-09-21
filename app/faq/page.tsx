@@ -15,7 +15,7 @@ const faq=[
  ["Kan ISELTO helpen bij de keuze tussen meerdere modellen?","Ja. Gebruik de vergelijker voor de technische verschillen en de keuzehulp voor een eerste selectie op basis van uw werksituatie."]
 ];
 
-export const metadata={title:"Veelgestelde vragen over MFP, print en service",description:"Veelgestelde vragen over zakelijke multifunctionals, lease, huur, koop, managed print, software en service."};
+export const metadata={title:"Veelgestelde vragen over MFP, print en service",description:"Veelgestelde vragen over zakelijke multifunctionals, lease, huur, koop, managed print, software en service.",alternates:{canonical:"/faq"},openGraph:{type:"website",title:"Veelgestelde vragen over MFP, print en service",description:"Veelgestelde vragen over zakelijke multifunctionals, lease, huur, koop, managed print, software en service.",url:"https://mfp.iselto.nl/faq"}};
 
 export default function Faq(){
  return <main>
