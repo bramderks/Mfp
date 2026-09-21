@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
+import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 const pages={
 "zakelijke-dienstverlening":{title:"MFP voor zakelijke dienstverlening",h:"Print en scan zonder dat het uw werk vertraagt.",text:"Voor advieskantoren, financiële dienstverlening, advocaten, administratie en andere zakelijke dienstverleners zijn betrouwbare print- en scanprocessen onderdeel van de dagelijkse werkplek.",points:["Beveiligd printen voor vertrouwelijke documenten","Snelle scanflows naar e-mail, cloud of dossier","A4 en A3 voor dagelijkse en specialistische documenten","Lease, huur of koop met passende service"]},
 "zorg-welzijn":{title:"MFP voor zorg en welzijn",h:"Veilig omgaan met documenten in zorg en welzijn.",text:"Zorgorganisaties werken met vertrouwelijke informatie en verschillende gebruikers. De printomgeving moet daarom betrouwbaar, beheersbaar en veilig zijn.",points:["Authenticatie en beveiligde printvrijgave","Scannen naar digitale dossiers en workflows","Beheer van meerdere locaties en gebruikers","All-in service en continuïteit"]},
