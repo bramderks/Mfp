@@ -12,7 +12,7 @@ type Function="print"|"scan"|"copy";
 
 const volumeLabel:Record<Volume,string>={unknown:"Weet ik niet",low:"0–1.000 pagina's",medium:"1.000–5.000 pagina's",high:"5.000–20.000 pagina's","very-high":"20.000+ pagina's"};
 
-function ppm(p:string){const m=p.match(/(d+)s*ppm/);return m?Number(m[1]):0;}
+function ppm(p:string){const m=p.match(/(\\d+)\\s*ppm/);return m?Number(m[1]):0;}
 
 export default function MfpSelector(){
  const [volume,setVolume]=useState<Volume>("unknown");const [speed,setSpeed]=useState<Speed>("any");const [users,setUsers]=useState<Users>("any");const [priority,setPriority]=useState<Priority>("any");const [functions,setFunctions]=useState<Function[]>(["print"]);const [format,setFormat]=useState<"any"|"A4"|"A3">("any");const [colour,setColour]=useState<"any"|"colour"|"mono">("any");
