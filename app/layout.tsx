@@ -5,6 +5,8 @@ import "./globals.css";
 import "./refinement.css";
 import "./suite.css";
 import "./marketing.css";
+import "@neondatabase/auth-ui/css";
+import {Providers} from "./providers";
 
 const siteUrl="https://mfp.iselto.nl";
 const siteName="MFP Iselto";
@@ -33,7 +35,7 @@ export default function RootLayout({children}:{children:React.ReactNode}){
  return <html lang="nl"><body>
   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationJsonLd)}}/>
   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(websiteJsonLd)}}/>
-  <div className="topbar"><div className="container topbar-inner"><span>25 jaar ervaring in de printbranche</span><span>Persoonlijk advies · Passende techniek · Service</span></div></div>
+  <Providers><div className="topbar"><div className="container topbar-inner"><span>25 jaar ervaring in de printbranche</span><span>Persoonlijk advies · Passende techniek · Service</span></div></div>
   <header className="site-header"><div className="container header-inner">
    <Link href="/" className="logo-link" aria-label="MFP Iselto home"><Image src="/iselto-logo.svg" alt="Iselto zakelijke MFP's en printers" width={285} height={68} priority/></Link>
    <nav className="desktop-nav" aria-label="Hoofdnavigatie"><Link href="/producten">Zakelijke MFP's</Link><Link href="/mfp-kiezen">MFP kiezen</Link><Link href="/oplossingen">Oplossingen</Link><Link href="/software">Software</Link><Link href="/managed-print">Managed print</Link><Link href="/service">Service</Link><Link href="/over-iselto">Over Iselto</Link><Link className="btn btn-primary nav-cta" href="/offerte">Offerte aanvragen</Link></nav>
@@ -47,5 +49,5 @@ export default function RootLayout({children}:{children:React.ReactNode}){
    <div><b>Oplossingen & service</b><p><Link href="/software">Print- en documentsoftware</Link></p><p><Link href="/managed-print">Managed print</Link></p><p><Link href="/oplossingen">Documentoplossingen</Link></p><p><Link href="/tco-scan">Printerparkscan & TCO</Link></p><p><Link href="/service">MFP service</Link></p><p><Link href="/branches">MFP per branche</Link></p></div>
    <div><b>Iselto</b><p><Link href="/klantverhalen">Klantverhalen</Link></p><p><Link href="/faq">Veelgestelde vragen</Link></p><p><Link href="/kennis">MFP kennis & advies</Link></p><p><Link href="/over-iselto">Over Iselto</Link></p><p><Link href="/vacatures">Vacatures</Link></p><p><Link href="/contact">Contact</Link></p></div>
   </div><div className="container footer-bottom"><span>© {new Date().getFullYear()} MFP Iselto</span><span>PRINT · SCAN · MANAGE</span></div></footer>
- </body></html>;
+ </Providers></body></html>;
 }
