@@ -1,0 +1,8 @@
+"use client";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+export function OnboardingForm({name,email}:{name:string,email:string}){
+ const router=useRouter();const [company,setCompany]=useState("");const [customerNumber,setCustomerNumber]=useState("");const [city,setCity]=useState("");const [error,setError]=useState("");const [busy,setBusy]=useState(false);
+ async function submit(e:React.FormEvent){e.preventDefault();setError("");setBusy(true);try{const res=await fetch("/api/portal/onboarding",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({company,customerNumber,city,email,name})});const data=await res.json();if(!res.ok)throw new Error(data.error||"Opslaan mislukt");router.push("/mijn-iselto");router.refresh()}catch(err){setError(err instanceof Error?err.message:"Opslaan mislukt")}finally{setBusy(false)}}
+ return <form className="portal-form" onSubmit={submit}><div className="portal-form-grid"><div className="portal-field full"><label>Bedrijfsnaam</label><input className="portal-input" required value={company} onChange={e=>setCompany(e.target.value)} placeholder="Bedrijfsnaam"/></div><div className="portal-field"><label>Klantnummer</label><input className="portal-input" value={customerNumber} onChange={e=>setCustomerNumber(e.target.value)} placeholder="Optioneel"/></div><div className="portal-field"><label>Plaats</label><input className="portal-input" value={city} onChange={e=>setCity(e.target.value)} placeholder="Plaats"/></div></div>{error&&<p className="portal-error">{error}</p>}<div className="portal-actions" style={{marginTop:20}}><button className="portal-btn primary" disabled={busy}>{busy?"Bezig…":"Klantomgeving activeren"}</button></div></form>
+}
