@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 
-export const metadata={title:"Contact",description:"Neem contact op met MFP ISELTO voor advies over multifunctionals, print en documentoplossingen."};
+export const metadata={title:"Contact",description:"Neem contact op met MFP ISELTO voor advies over multifunctionals, print en documentoplossingen.",alternates:{canonical:"/contact"},openGraph:{type:"website",title:"Contact",description:"Neem contact op met MFP ISELTO voor advies over multifunctionals, print en documentoplossingen.",url:"https://mfp.iselto.nl/contact"}};
 
 export default function Contact(){
  return <main>
