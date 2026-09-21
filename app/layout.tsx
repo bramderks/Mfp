@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./globals.css";
 import "./refinement.css";
 import "./suite.css";
+import "./marketing.css";
 
 const siteUrl="https://mfp.iselto.nl";
 const siteName="MFP Iselto";
@@ -40,7 +41,7 @@ export default function RootLayout({children}:{children:React.ReactNode}){
   </div></header>
   {children}
   <footer className="site-footer"><div className="container footer-grid">
-   <div className="footer-brand"><div className="footer-wordmark" aria-label="MFP Iselto">MFP <span>Iselto</span></div><p>{siteDescription}</p><p className="footer-muted">25 jaar ervaring · 1.000+ zakelijke klanten in de Benelux.</p></div>
+   <div className="footer-brand"><div className="footer-wordmark" aria-label="MFP Iselto">MFP <span>Iselto</span></div><p>{siteDescription}</p><p className="footer-muted">25 jaar ervaring · Praktisch advies voor zakelijke print- en documentomgevingen.</p></div>
    <div><b>MFP's & printers</b><p><Link href="/producten">Alle zakelijke MFP's</Link></p><p><Link href="/producten/a4-multifunctionals">A4 multifunctionals</Link></p><p><Link href="/producten/a3-multifunctionals">A3 multifunctionals</Link></p><p><Link href="/zakelijke-printer">Zakelijke printers</Link></p><p><Link href="/kopieerapparaat">Zakelijk kopieerapparaat</Link></p></div>
    <div><b>Kiezen & financieren</b><p><Link href="/mfp-kiezen">MFP keuzehulp</Link></p><p><Link href="/vergelijker">MFP vergelijker</Link></p><p><Link href="/lease-huur-koop">MFP leasen, huren of kopen</Link></p><p><Link href="/mfp-leasen">MFP leasen</Link></p><p><Link href="/mfp-huren">MFP huren</Link></p><p><Link href="/mfp-kopen">MFP kopen</Link></p></div>
    <div><b>Oplossingen & service</b><p><Link href="/software">Print- en documentsoftware</Link></p><p><Link href="/managed-print">Managed print</Link></p><p><Link href="/oplossingen">Documentoplossingen</Link></p><p><Link href="/tco-scan">Printerparkscan & TCO</Link></p><p><Link href="/service">MFP service</Link></p><p><Link href="/branches">MFP per branche</Link></p></div>
