@@ -8,11 +8,11 @@ const pages=[
  "/mfp-kiezen","/lease-huur-koop","/tco-scan","/oplossingen","/software","/managed-print","/diensten","/service",
  "/branches","/branches/zakelijke-dienstverlening","/branches/zorg-welzijn","/branches/onderwijs","/branches/industrie-techniek",
  "/branches/handel-logistiek","/branches/mkb","/downloads","/offerte","/contact","/vergelijker","/klantverhalen","/faq",
- "/over-iselto","/vacatures"
+ "/over-iselto","/vacatures","/kennis","/kennis/mfp-kosten","/kennis/a4-of-a3-mfp","/kennis/managed-print"
 ];
 
 const priority:Record<string,number>={
- "/":1,"/producten":0.95,"/mfp-kiezen":0.9,"/vergelijker":0.85,"/zakelijke-mfp":0.9,"/zakelijke-printer":0.85,
+ "/":1,"/producten":0.95,"/kennis":0.8,"/kennis/mfp-kosten":0.75,"/kennis/a4-of-a3-mfp":0.75,"/kennis/managed-print":0.75,"/mfp-kiezen":0.9,"/vergelijker":0.85,"/zakelijke-mfp":0.9,"/zakelijke-printer":0.85,
  "/mfp-leasen":0.8,"/mfp-huren":0.8,"/mfp-kopen":0.8,"/lease-huur-koop":0.85,"/tco-scan":0.8,"/managed-print":0.85,
  "/software":0.85,"/service":0.8,"/oplossingen":0.8,"/branches":0.75,"/faq":0.7,"/contact":0.65,"/offerte":0.8
 };
