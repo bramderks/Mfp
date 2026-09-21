@@ -11,7 +11,7 @@ const solutions = [
   {num:"08", title:"Duurzaam printen", text:"Een passende machine op de juiste plek, minder verspilling en inzicht in gebruik vormen samen een efficiëntere printomgeving.", tags:["Efficiëntie","Verbruik","Lifecycle"]},
 ];
 
-export const metadata={title:"Oplossingen",description:"Beveiligd printen, scanworkflows, cloud, document management en beheer van uw printomgeving."};
+export const metadata={title:"Oplossingen",description:"Beveiligd printen, scanworkflows, cloud, document management en beheer van uw printomgeving.",alternates:{canonical:"/oplossingen"},openGraph:{type:"website",title:"Oplossingen",description:"Beveiligd printen, scanworkflows, cloud, document management en beheer van uw printomgeving.",url:"https://mfp.iselto.nl/oplossingen"}};
 
 export default function Solutions(){
   return <main>
