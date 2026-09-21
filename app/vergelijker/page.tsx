@@ -1,7 +1,7 @@
 import Link from "next/link";
 import MfpCompare from "@/components/MfpCompare";
 
-export const metadata={title:"MFP vergelijker",description:"Vergelijk zakelijke MFP's van ISELTO op snelheid, formaat, kleur, scanmogelijkheden, papiercapaciteit en workflowfuncties.",alternates:{canonical:"/vergelijker"},openGraph:{type:"website",title:"MFP vergelijker",description:"Vergelijk zakelijke MFP's van ISELTO op snelheid, formaat, kleur, scanmogelijkheden, papiercapaciteit en workflowfuncties.",url:"https://mfp.iselto.nl/vergelijker"}};
+export const metadata={title:"MFP vergelijker",description:"Vergelijk zakelijke MFP's van Iselto op snelheid, formaat, kleur, scanmogelijkheden, papiercapaciteit en workflowfuncties.",alternates:{canonical:"/vergelijker"},openGraph:{type:"website",title:"MFP vergelijker",description:"Vergelijk zakelijke MFP's van Iselto op snelheid, formaat, kleur, scanmogelijkheden, papiercapaciteit en workflowfuncties.",url:"https://mfp.iselto.nl/vergelijker"}};
 
 export default function Compare(){
  return <main>
