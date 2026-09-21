@@ -1,11 +1,11 @@
 export const brand = {
-  name: "MFP ISELTO",
-  shortName: "ISELTO",
+  name: "MFP Iselto",
+  shortName: "Iselto",
   experience: "25 jaar ervaring in de printbranche",
   mission:
     "Wij helpen organisaties slimmer werken met betrouwbare print-, scan- en documentoplossingen die passen bij hun mensen, processen en ambities.",
   vision:
-    "Print is geen los apparaat, maar onderdeel van de manier waarop een organisatie informatie verwerkt. ISELTO wil de partner zijn die techniek begrijpelijk maakt en documentstromen steeds eenvoudiger, veiliger en efficiënter laat werken.",
+    "Print is geen los apparaat, maar onderdeel van de manier waarop een organisatie informatie verwerkt. Iselto wil de partner zijn die techniek begrijpelijk maakt en documentstromen steeds eenvoudiger, veiliger en efficiënter laat werken.",
   promise:
     "Persoonlijk advies, passende techniek en service die verder gaat dan alleen de machine.",
   values: [
