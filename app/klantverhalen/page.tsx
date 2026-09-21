@@ -6,7 +6,7 @@ const cases=[
  {type:"Fictief voorbeeld · zorg & welzijn",title:"Veilig printen zonder extra gedoe.",intro:"Een organisatie met meerdere teams wilde vertrouwelijke documenten niet langer onbeheerd bij een printer laten liggen.",problem:["Printopdrachten bleven bij het apparaat liggen","Meerdere gebruikers deelden machines","Beveiliging moest aansluiten op de bestaande werkwijze"],solution:["Print release met gebruikersauthenticatie","Duidelijke gebruikersrechten","Begeleiding bij invoering en gebruik"],result:"Documenten worden pas vrijgegeven wanneer de medewerker zich bij de MFP identificeert en de printomgeving is eenvoudiger te beheren."}
 ];
 
-export const metadata={title:"Klantverhalen en praktijkvoorbeelden",description:"Fictieve praktijkvoorbeelden van hoe zakelijke organisaties hun MFP-, print- en documentomgeving kunnen verbeteren."};
+export const metadata={title:"Klantverhalen en praktijkvoorbeelden",description:"Fictieve praktijkvoorbeelden van hoe zakelijke organisaties hun MFP-, print- en documentomgeving kunnen verbeteren.",alternates:{canonical:"/klantverhalen"},openGraph:{type:"website",title:"Klantverhalen en praktijkvoorbeelden",description:"Fictieve praktijkvoorbeelden van hoe zakelijke organisaties hun MFP-, print- en documentomgeving kunnen verbeteren.",url:"https://mfp.iselto.nl/klantverhalen"}};
 
 export default function Cases(){
  return <main>
