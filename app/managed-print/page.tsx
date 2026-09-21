@@ -7,7 +7,7 @@ const pillars=[
  {n:"04",title:"Optimalisatie",text:"Verminder onnodige apparatuur en verspilling en stem de omgeving af op werkplekken, locaties en printgedrag."},
 ];
 
-export const metadata={title:"Managed Print",description:"Managed Print van ISELTO: inzicht, beheer, beveiliging en optimalisatie van uw volledige printomgeving."};
+export const metadata={title:"Managed Print",description:"Managed Print van ISELTO: inzicht, beheer, beveiliging en optimalisatie van uw volledige printomgeving.",alternates:{canonical:"/managed-print"},openGraph:{type:"website",title:"Managed Print",description:"Managed Print van ISELTO: inzicht, beheer, beveiliging en optimalisatie van uw volledige printomgeving.",url:"https://mfp.iselto.nl/managed-print"}};
 
 export default function ManagedPrint(){
  return <main>
