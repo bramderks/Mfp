@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 
-export const metadata={title:"MFP service en storingsservice voor bedrijven",description:"Zakelijke MFP service met technische ondersteuning, onderhoud, supplies en een praktische servicemeldroute."};
+export const metadata={title:"MFP service en storingsservice voor bedrijven",description:"Zakelijke MFP service met technische ondersteuning, onderhoud, supplies en een praktische servicemeldroute.",alternates:{canonical:"/service"},openGraph:{type:"website",title:"MFP service en storingsservice voor bedrijven",description:"Zakelijke MFP service met technische ondersteuning, onderhoud, supplies en een praktische servicemeldroute.",url:"https://mfp.iselto.nl/service"}};
 
 export default async function Service({searchParams}:{searchParams:Promise<{type?:string}>}){
  const q=await searchParams;
