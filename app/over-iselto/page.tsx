@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {brand} from "@/lib/brand";
 
-export const metadata={title:"Over Iselto",description:"Maak kennis met MFP Iselto, onze visie, waarden en manier van werken."};
+export const metadata={title:"Over Iselto",description:"Maak kennis met MFP Iselto, onze visie, waarden en manier van werken.",alternates:{canonical:"/over-iselto"},openGraph:{type:"website",title:"Over Iselto",description:"Maak kennis met MFP Iselto, onze visie, waarden en manier van werken.",url:"https://mfp.iselto.nl/over-iselto"}};
 
 export default function About(){
  return <main>
