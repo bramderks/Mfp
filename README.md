@@ -23,3 +23,4 @@ Set `DATABASE_URL` and `RESEND_API_KEY` in Vercel for persistent lead storage an
 The site uses canonical URLs, unique page metadata, Open Graph metadata, Organization/WebSite structured data, product and breadcrumb structured data, an XML sitemap, crawlable internal linking, a dedicated MFP knowledge hub, and long-form commercial/educational landing pages.
 SEO build verification fix applied.
 Final metadata syntax correction.
+SEO title suffix cleanup completed.
