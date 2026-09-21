@@ -1,0 +1,13 @@
+import Link from "next/link";
+import TcoCalculator from "@/components/TcoCalculator";
+
+export const metadata={title:"TCO scan printerpark",description:"Bereken indicatief wat uw zakelijke printerpark per maand en per jaar kost en bespreek daarna uw totale printkosten met ISELTO."};
+
+export default function TcoScan(){
+ return <main>
+  <section className="dark-hero"><div className="container hero-copy"><div className="eyebrow eyebrow-light">TCO & PRINTERPARKSCAN</div><h1>Wat kost uw printerpark werkelijk?</h1><p>Printkosten zitten niet alleen in de machine. Breng lease of afschrijving, printkosten, service en supplies samen in één overzichtelijke rekensom.</p><div className="hero-actions"><Link className="btn btn-light" href="#calculator">Bereken uw indicatie</Link><Link className="btn btn-outline-light" href="/managed-print">Managed print</Link></div></div></section>
+  <section className="container editorial-section"><div className="section-intro"><div><div className="eyebrow">TOTALE KOSTEN</div><h2>Maak verborgen kosten zichtbaar.</h2></div><p className="lead">Een goede analyse kijkt verder dan een maandtermijn. Denk ook aan toner, onderhoud, tijd voor beheer, verschillende contracten, stilstand en een printerpark dat niet meer aansluit op het gebruik.</p></div><div className="selector-benefits"><article><strong>Apparatuur</strong><span>Lease, huur, afschrijving of aankoop.</span></article><article><strong>Verbruik</strong><span>Printvolume, kleurgebruik, papier en toner.</span></article><article><strong>Service</strong><span>Onderhoud, storingen en ondersteuning.</span></article><article><strong>Beheer</strong><span>Tijd, monitoring, contracten en administratie.</span></article></div></section>
+  <section className="container tco-section" id="calculator"><div className="section-head"><div><div className="eyebrow">REKENTOOL</div><h2>Bereken uw huidige maand- en jaarlast.</h2></div></div><TcoCalculator/></section>
+  <section className="split-section"><div className="container split-grid"><div><div className="eyebrow">NA DE BEREKENING</div><h2>De rekensom is het startpunt.</h2></div><div><p className="large-copy">Voor een echte printerparkscan kijken we ook naar aantallen apparaten, locaties, volumes, contracten, gebruik en documentstromen. Zo ontstaat een compleet beeld van de huidige situatie.</p><Link className="btn btn-primary" href="/offerte">Vraag een printerparkscan aan</Link></div></div></section>
+ </main>;
+}
