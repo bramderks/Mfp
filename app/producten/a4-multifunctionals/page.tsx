@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
-export const metadata={title:"A4 multifunctionals voor bedrijven",description:"A4 multifunctionals voor zakelijke werkgroepen. Bekijk kleuren-MFP's van Kyocera, vergelijk modellen en vraag een passend voorstel."};
+export const metadata={title:"A4 multifunctionals voor bedrijven",description:"A4 multifunctionals voor zakelijke werkgroepen. Bekijk onze kleuren-MFP's, vergelijk modellen en vraag een passend voorstel."};
 export default function A4Page(){
  const items=products.filter(p=>p.format==="A4");
  return <main>
