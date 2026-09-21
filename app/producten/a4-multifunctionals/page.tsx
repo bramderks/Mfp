@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
-export const metadata={title:"A4 multifunctionals voor bedrijven",description:"A4 multifunctionals voor zakelijke werkgroepen. Bekijk onze kleuren-MFP's, vergelijk modellen en vraag een passend voorstel."};
+export const metadata={title:"A4 multifunctionals voor bedrijven",description:"A4 multifunctionals voor zakelijke werkgroepen. Bekijk onze kleuren-MFP's, vergelijk modellen en vraag een passend voorstel.",alternates:{canonical:"/producten/a4-multifunctionals"},openGraph:{type:"website",title:"A4 multifunctionals voor bedrijven",description:"A4 multifunctionals voor zakelijke werkgroepen. Bekijk onze kleuren-MFP's, vergelijk modellen en vraag een passend voorstel.",url:"https://mfp.iselto.nl/producten/a4-multifunctionals"}};
 export default function A4Page(){
  const items=products.filter(p=>p.format==="A4");
  return <main>
