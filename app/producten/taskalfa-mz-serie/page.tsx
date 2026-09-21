@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {products} from "@/lib/products";
-export const metadata={title:"Kyocera TASKalfa MZ-serie | A3 multifunctionals",description:"Bekijk de Kyocera TASKalfa MZ-serie: A3 kleuren- en zwart-wit multifunctionals van 25 tot 70 ppm. Vergelijk specificaties en vraag advies."};
+export const metadata={title:"Kyocera TASKalfa MZ-serie | A3 multifunctionals",description:"Bekijk de Kyocera TASKalfa MZ-serie: A3 kleuren- en zwart-wit multifunctionals van 25 tot 70 ppm. Vergelijk specificaties en vraag advies.",alternates:{canonical:"/producten/taskalfa-mz-serie"},openGraph:{type:"website",title:"Kyocera TASKalfa MZ-serie | A3 multifunctionals",description:"Bekijk de Kyocera TASKalfa MZ-serie: A3 kleuren- en zwart-wit multifunctionals van 25 tot 70 ppm. Vergelijk specificaties en vraag advies.",url:"https://mfp.iselto.nl/producten/taskalfa-mz-serie"}};
 export default function MzSeries(){
  const items=products.filter(p=>p.name.startsWith("TASKalfa MZ"));
  return <main>
