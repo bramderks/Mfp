@@ -10,7 +10,7 @@ const services=[
   {num:"07",title:"Optimalisatie",text:"Uw organisatie verandert. Daarom blijven we kijken of apparatuur, software en werkwijze nog aansluiten."},
 ];
 
-export const metadata={title:"Diensten",description:"Advies, installatie, training, support, printbeheer en optimalisatie door ISELTO."};
+export const metadata={title:"Diensten",description:"Advies, installatie, training, support, printbeheer en optimalisatie door ISELTO.",alternates:{canonical:"/diensten"},openGraph:{type:"website",title:"Diensten",description:"Advies, installatie, training, support, printbeheer en optimalisatie door ISELTO.",url:"https://mfp.iselto.nl/diensten"}};
 
 export default function Services(){
  return <main>
