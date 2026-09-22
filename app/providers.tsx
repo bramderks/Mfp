@@ -6,5 +6,5 @@ import {NeonAuthUIProvider} from "@neondatabase/auth-ui";
 import {authClient} from "@/lib/auth/client";
 export function Providers({children}:{children:ReactNode}){
  const router=useRouter();
- return <NeonAuthUIProvider authClient={authClient} navigate={router.push} replace={router.replace} onSessionChange={()=>router.refresh()} emailOTP social={{providers:["google"]}} redirectTo="/mijn-iselto" Link={Link} organization={{}}>{children}</NeonAuthUIProvider>;
+ return <NeonAuthUIProvider authClient={authClient} navigate={router.push} replace={router.replace} onSessionChange={()=>router.refresh()} social={{providers:["google"]}} redirectTo="/mijn-iselto" Link={Link}>{children}</NeonAuthUIProvider>;
 }
